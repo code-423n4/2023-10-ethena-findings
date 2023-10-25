@@ -25,6 +25,26 @@ https://github.com/code-423n4/2023-10-ethena/blob/2eef9889496cb9af0a5042fbc599db
 
 https://github.com/code-423n4/2023-10-ethena/blob/2eef9889496cb9af0a5042fbc599dba9c08d4002/contracts/EthenaMinting.sol#L260
 
+https://github.com/code-423n4/2023-10-ethena/blob/2eef9889496cb9af0a5042fbc599dba9c08d4002/contracts/EthenaMinting.sol#L271
+
+https://github.com/code-423n4/2023-10-ethena/blob/2eef9889496cb9af0a5042fbc599dba9c08d4002/contracts/EthenaMinting.sol#L292
+
+https://github.com/code-423n4/2023-10-ethena/blob/2eef9889496cb9af0a5042fbc599dba9c08d4002/contracts/EthenaMinting.sol#L300
+
+https://github.com/code-423n4/2023-10-ethena/blob/2eef9889496cb9af0a5042fbc599dba9c08d4002/contracts/EthenaMinting.sol#L342-L346
+
+https://github.com/code-423n4/2023-10-ethena/blob/2eef9889496cb9af0a5042fbc599dba9c08d4002/contracts/EthenaMinting.sol#L378
+
+https://github.com/code-423n4/2023-10-ethena/blob/2eef9889496cb9af0a5042fbc599dba9c08d4002/contracts/EthenaMinting.sol#L383
+
+https://github.com/code-423n4/2023-10-ethena/blob/2eef9889496cb9af0a5042fbc599dba9c08d4002/contracts/EthenaMinting.sol#L403
+
+https://github.com/code-423n4/2023-10-ethena/blob/2eef9889496cb9af0a5042fbc599dba9c08d4002/contracts/EthenaMinting.sol#L405
+
+https://github.com/code-423n4/2023-10-ethena/blob/2eef9889496cb9af0a5042fbc599dba9c08d4002/contracts/EthenaMinting.sol#L407
+
+https://github.com/code-423n4/2023-10-ethena/blob/2eef9889496cb9af0a5042fbc599dba9c08d4002/contracts/EthenaMinting.sol#L421
+
 ZeroAddressException
 OnlyMinter
 CantRenounceOwnership
@@ -38,6 +58,8 @@ Duplicate
 InvalidAddress
 TransferFailed
 InvalidAssetAddress
+
+And others.
 
 This is a bug because when these require statements revert, it will revert with a generic "revert" message instead of a custom message.
 
