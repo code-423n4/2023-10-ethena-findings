@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Krace",
+  "risk": "2",
+  "title": "The `rescueTokens` function is susceptible to a rug-pull attack if the Reward Asset has multiple addresses",
+  "issueId": 46,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/46"
+}
