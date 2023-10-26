@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xfave",
+  "risk": "2",
+  "title": "EthenaMinting.sol#_computeDomainSeparator - use of block.chainid can lead to replay attack in course of an hard fork on the ethereum chain",
+  "issueId": 35,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/35"
+}
