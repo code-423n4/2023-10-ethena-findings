@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0x_Scar",
+  "risk": "3",
+  "title": "Wrong orderType check when verifying route",
+  "issueId": 36,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/36"
+}
