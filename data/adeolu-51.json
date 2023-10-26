@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "adeolu",
+  "risk": "2",
+  "title": "if collateral asset is a low decimal token, collateral amount will not be split between the route addresses as specified by the route ratio.",
+  "issueId": 51,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/51"
+}
