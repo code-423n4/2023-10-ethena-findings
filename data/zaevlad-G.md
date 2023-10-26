@@ -1,4 +1,4 @@
-In StakedUSDe contract there is a function on line https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDe.sol#L91:
+1. In StakedUSDe contract there is a function on line https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDe.sol#L91:
 
 ```
   function transferInRewards(uint256 amount) external nonReentrant onlyRole(REWARDER_ROLE) notZero(amount) {
@@ -17,3 +17,5 @@ In StakedUSDe contract there is a function on line https://github.com/code-423n4
 The line `uint256 newVestingAmount = amount + getUnvestedAmount();` got no sence because `newVestingAmount ` will always be equal to `amount`, as the function will revert if `getUnvestedAmount()` greater than 0.
 
 You can save gas by deleting that line: so it will not create a new variable, make a call to the other function and do calculations there. 
+
+2. MAX_COOLDOWN_DURATION variable in StakedUSDeV2 contract can be marked as constant as it is not planed to be changed later. 
