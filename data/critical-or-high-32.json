@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "critical-or-high",
+  "risk": "3",
+  "title": "Dos attack via dust USDE donation against StakedUSDeV2 ",
+  "issueId": 32,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/32"
+}
