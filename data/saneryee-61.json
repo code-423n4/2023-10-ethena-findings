@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "saneryee",
+  "risk": "2",
+  "title": "Uninitialized `Minter` in `USDe` Contract",
+  "issueId": 61,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/61"
+}
