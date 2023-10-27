@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "wisdomn_",
+  "risk": "3",
+  "title": "Using block.number during mint and redeem operations could lead to unexpected results.",
+  "issueId": 95,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/95"
+}
