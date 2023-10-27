@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "wisdomn_",
+  "risk": "3",
+  "title": "The check in function _beforeTokenTransfer for address 0  is wrong and can lead to loss of funds.",
+  "issueId": 104,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/104"
+}
