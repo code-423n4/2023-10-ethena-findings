@@ -1,4 +1,4 @@
-## Summary
+## [NC‑1] Unnecessary operation in StakedUSDe.sol which consumes Gas
 
 Function transferInRewards in StakedUSDe.sol has an unnecessary operation which always results in adding zero.
 
