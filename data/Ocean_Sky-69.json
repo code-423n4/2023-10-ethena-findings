@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Ocean_Sky",
+  "risk": "2",
+  "title": "Roles can be left vacant temporarily after executing revokeRole function",
+  "issueId": 69,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/69"
+}
