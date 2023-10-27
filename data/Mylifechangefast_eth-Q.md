@@ -44,4 +44,8 @@ Even assembly can benefit from using readable constants instead of hex/numeric l
       if (address(this).balance < amount) revert InvalidAmount();
 ```
 
+# No zero check for critical function
+***The ` isSupportedAsset` function doesn't check if the asset that anyone can input is an address(0) the function then checks if the address(0) is supported, what if an attacker creates an address that would be supported?*** *Prevention is better than cure*
+
+# 
 
