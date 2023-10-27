@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "max10afternoon",
+  "risk": "2",
+  "title": "StakedUSDeV2: redistributeLockedAmount can be frontranned with a deposit to get access to undeserved extra yield, when the 'to' parameter is set to 0",
+  "issueId": 103,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/103"
+}
