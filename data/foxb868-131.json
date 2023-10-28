@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "foxb868",
+  "risk": "3",
+  "title": "Invalid route percentages allow `undercollateralized` USDe minting, risking protocol integrity.",
+  "issueId": 131,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/131"
+}
