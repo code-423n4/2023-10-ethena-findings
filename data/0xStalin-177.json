@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xStalin",
+  "risk": "2",
+  "title": "Existing implementation to handle the cooldown periods don't allow users to schedule withdraws at different times, instead, the cooldownPeriod will be prolonged for all the user's requests, causing that the time of old requests to be prolonged until the new cooldownEnd for the newest requests",
+  "issueId": 177,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/177"
+}
