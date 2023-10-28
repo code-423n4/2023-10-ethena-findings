@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "wisdomn_",
+  "risk": "3",
+  "title": "The disableMintRedeem() function can be frontrun by malicious users",
+  "issueId": 170,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/170"
+}
