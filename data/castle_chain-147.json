@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "castle_chain",
+  "risk": "3",
+  "title": "the full restricted role can withdraw his stUSDe tokens and get his usde back, in case the attacker get full restricted after he stole  stUSDe he can easily unstake his tokens and get his stolen usde , and prevent the admin from repossessing his tokens ",
+  "issueId": 147,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/147"
+}
