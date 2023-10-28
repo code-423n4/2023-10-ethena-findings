@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "matrix_0wl",
+  "risk": "3",
+  "title": "Risk of reuse of signatures across forks due to lack of chainID validation",
+  "issueId": 173,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/173"
+}
