@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Hama",
+  "risk": "2",
+  "title": "Access Control Vulnerability in cooldownAssets and cooldownShares Functions",
+  "issueId": 149,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/149"
+}
