@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "foxb868",
+  "risk": "3",
+  "title": "Permit-based transfer risks asset theft, discourages user approvals, lacks revocation.",
+  "issueId": 130,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/130"
+}
