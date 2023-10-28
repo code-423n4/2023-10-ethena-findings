@@ -50,7 +50,7 @@ https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0c
 
 https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/StakedUSDe.sol#L123 
 
-the function `removeFromBlacklist()` revoke the blacklist role from the `target` address , so due to preventing the owner from being blacklisted , the check of that the target is not the owner can be removed 
+the function `removeFromBlacklist()` revoke the blacklist role from the `target` address , so due to preventing the owner from being blacklisted , the modifier that checks of that the target is not the owner can be removed .
 ```solidity
   function removeFromBlacklist(address target, bool isFullBlacklisting)
     external
