@@ -1,4 +1,4 @@
-# Analysis - Open Dollar
+# Analysis - Ethena Labs 
 
 By InvitedTea |  @invitedTea  | Oct 28 2023
 
@@ -188,6 +188,8 @@ The presence of `StakedUSDeV2.sol` suggests plans for future upgrades. Ensuring 
 
 ## 7. Time spent on analysis 
 ``24 Hours``
+
+
 
 
 
