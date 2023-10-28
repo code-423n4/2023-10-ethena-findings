@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Hama",
+  "risk": "3",
+  "title": " Risk of Arbitrary Code Execution and Self-Destruct When Transferring Tokens",
+  "issueId": 168,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/168"
+}
