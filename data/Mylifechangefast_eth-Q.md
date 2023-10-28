@@ -47,5 +47,24 @@ Even assembly can benefit from using readable constants instead of hex/numeric l
 # No zero check for critical function
 ***The ` isSupportedAsset` function doesn't check if the asset that anyone can input is an address(0) the function then checks if the address(0) is supported, what if an attacker creates an address that would be supported?*** *Prevention is better than cure*
 
-# 
+# No input validation for `transferInRewards` which could be set to zero and still waste gas when the function is called.
+
+***`transferInRewards` function with an added check for the amount argument to ensure it's not zero:***
+```
+function transferInRewards(uint256 amount) external nonReentrant onlyRole(REWARDER_ROLE) {
+    require(amount > 0, "Amount must be greater than zero");
+    if (getUnvestedAmount() > 0) revert StillVesting();
+    uint256 newVestingAmount = amount + getUnvestedAmount();
+
+    vestingAmount = newVestingAmount;
+    lastDistributionTimestamp = block.timestamp;
+    // transfer assets from rewarder to this contract
+    IERC20(asset()).safeTransferFrom(msg.sender, address(this), amount);
+
+    emit RewardsReceived(amount, newVestingAmount);
+}
+```
+***With this modification, the function will only proceed if the amount provided is greater than zero, and it will revert with the message "Amount must be greater than zero" if the amount is zero or negative. This helps ensure that no zero or negative values are accepted for the amount argument.***
+
+ 
 
