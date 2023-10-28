@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Mylifechangefast_eth",
+  "risk": "2",
+  "title": "`redistributeLockedAmount` can go bizarre due lack of proper validation(`from` and `to` address can ditribute locked token even though they don't have FULL_RESTRICTED_STAKER_ROLE.)",
+  "issueId": 144,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/144"
+}
