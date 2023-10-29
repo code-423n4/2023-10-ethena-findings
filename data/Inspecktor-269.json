@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Inspecktor",
+  "risk": "3",
+  "title": "Not only a user with the REDEEMER_ROLE role can call the burnFrom() function",
+  "issueId": 269,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/269"
+}
