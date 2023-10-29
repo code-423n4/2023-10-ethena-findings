@@ -146,7 +146,7 @@ This function is used to redeem the staking amount after the cooldown period whi
 
 
 ## 4. Mechanism Review
-A mechanism review of the code base is a systematic process of analyzing the code base to identify and assess potential risks and vulnerabilities. Our approach to manual code analysis involves examining every line of code in the Ethena Labs codebase.When a user stakes assets such as ETH and SETH in exchange for USDe stablecoins, they will receive a quote from the API server indicating how many USDe coins they will receive for their collateral assets. If the user agrees to the quote, they can then deposit or redeem their assets in the Ethena ecosystem. Ethena then diversifies the assets across several custodians to hedge the assets with off-exchange settlement firms such as Copper and Fireblocks.Once the Ethena protocol confirms the deposit, it mints the corresponding amount of USDe coins and sends them to the user. After a certain aggregated amount is reached, the off-exchange settlement firm opens short perpetual positions in centralized exchanges such as Binance and Bitget.
+A mechanism review of the code base is a systematic process of analyzing the code base to identify and assess potential risks and vulnerabilities. Our approach to manual code analysis involves examining every line of code in the Ethena Labs codebase.When a user stakes assets such as ETH and SETH in exchange for USDe stablecoins, they will receive a quote from the API server indicating how many USDe coins they will receive for their collateral assets. If the user agrees to the quote, they can then deposit or redeem their assets in the Ethena ecosystem. Ethena then diversifies the assets across several custodians to hedge the assets with off-exchange settlement firms such as Copper and Fireblocks.Once the Ethena protocol confirms the deposit, it mints the corresponding amount of USDe coins and sends them to the user. After a certain aggregated amount is reached, the off-exchange settlement firm opens short perpetual positions in centralized exchanges such as Binance and Bitget.Ethena Protocol has adopted the ERC-4626 library for staking and unstaking USDE only, not for minting USDE in exchange for other assets.
 
 Following we can see the process adopted by the Ethena protocol
 
@@ -194,7 +194,8 @@ https://docs.google.com/spreadsheets/d/1IbNN06tFZOBRnds6AcsVuI4AF99edQookUjgjA4R
 
 
 ## 6. Recommendation 
-After evalutation of ethena labs code base we observed the there is no `pause and not-pause` mechanism .The pause and not-pause mechanism in smart contracts is a way to temporarily disable certain functions of a smart contract. This can be useful for a variety of reasons, such as to fix a security vulnerability, to make changes to the smart contract, or to respond to an unexpected event.The pause and not-pause mechanism is typically implemented using a Boolean variable called paused. This variable is set to true when the contract is paused and false when it is not. Functions that need to be pausable can then be decorated with the whenNotPaused modifier. This modifier will ensure that the function can only be called when the contract is not paused.
+
+1. After evalutation of ethena labs code base we observed the there is no `pause and not-pause` mechanism .The pause and not-pause mechanism in smart contracts is a way to temporarily disable certain functions of a smart contract. This can be useful for a variety of reasons, such as to fix a security vulnerability, to make changes to the smart contract, or to respond to an unexpected event.The pause and not-pause mechanism is typically implemented using a Boolean variable called paused. This variable is set to true when the contract is paused and false when it is not. Functions that need to be pausable can then be decorated with the whenNotPaused modifier. This modifier will ensure that the function can only be called when the contract is not paused.
 
 Code
 ```solidity
@@ -222,6 +223,10 @@ contract Pausable {
     function withdraw(uint256 amount) public whenNotPaused {...} //@audit implementation paused and not-paused mechanisms
 ```
 Ethena Labs adopted the gatekeeper role to disable the MINTER and REDEEMER functions after losing $300,000. Instead, Ethena Labs could have directly adopted the pause and unpause mechanism. If the admin role notices that a compromised minter is minting USDe without the underlying asset, the admin role can pause both the mint() and redeem() functions of the EthenaMinting contract. Other functions that are used to conduct economic activity in the Ethena ecosystem can also implement the pause and unpause mechanism to avoid unexpected events.
+
+2. Ethena Labs has adopted the ERC-4626 vault system to allow users to stake and unstake USDE tokens. However, the stake() function is not yet implemented. If Ethena Labs plans to add the stake() function in the future, it should consider adding slippage protection for the shares that users receive back through the ERC-4626 vault system.
+
+3.Once the Ethena team has added the stake() functionality for staking USDE, it should try to adopt the ERC-4626 router. This would allow users to trade shares in different ERC-4626 vaults without having to worry about inflation attacks.
 
 ### Time spent:
 46 hours
