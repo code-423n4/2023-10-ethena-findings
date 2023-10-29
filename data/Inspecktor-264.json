@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Inspecktor",
+  "risk": "3",
+  "title": "An attacker can block the service by first calling mint() with a value close to maxMintPerBlock, then calling redeem()",
+  "issueId": 264,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/264"
+}
