@@ -15,7 +15,7 @@
   - [StakedUSDe.sol](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDe.sol) - is like the StakedUSDeV2 contract but without the cooldown period, it instead has the additional functionality of blacklisting certain user types, softly(prevents participation in staking) or fully (full account blacklisting). 
   - [USDeSilo.sol](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/USDeSilo.sol) - stores `USDe` during the stake cooldown process. USDe is withdrawn into the staking contracts to be passed on to the user.
 ##### Access-control contracts
-  - [SingleAdminAccessControl.sol](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/SingleAdminAccessControl.sol) -  is the contract that provides a single admin role. It makes needed calls to OZ access-control contract to grant, transfer, renounce and revoke privileged roles.
+  - [SingleAdminAccessControl.sol](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/SingleAdminAccessControl.sol) -  is an abstract contract that provides a single admin role. Calls are made through it to grant, transfer, and revoke privileged roles.
 
 #### **1.2.2 Roles**
 ##### StableCoin contract
@@ -59,6 +59,8 @@ We approached the audit in 3 general steps after which we generated our report.
   - Care should be taken when granting privileged roles so as not to grant an account more than one role (e.g granting a gatekeeper minter/redeemer role, owner granting himself minter role etc) to improve decentralization.
   - Above all, we recommend mitigting discovered issues, implementing constant upgrades and audits to keep the protocol always secure.
    
+
+
 
 ### Time spent:
 29 hours
