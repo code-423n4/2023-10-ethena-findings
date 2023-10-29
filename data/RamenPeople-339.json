@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "RamenPeople",
+  "risk": "2",
+  "title": "BLACKLIST_MANAGER_ROLE has much more power than declared and assumed",
+  "issueId": 339,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/339"
+}
