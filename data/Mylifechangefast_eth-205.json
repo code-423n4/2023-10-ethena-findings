@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Mylifechangefast_eth",
+  "risk": "3",
+  "title": "Fund loss dues to lack of ensuring that owner is the msg.sender(Front-running)",
+  "issueId": 205,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/205"
+}
