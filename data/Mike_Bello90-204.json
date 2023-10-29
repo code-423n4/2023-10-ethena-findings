@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Mike_Bello90",
+  "risk": "2",
+  "title": "Vulnerability: Incorrect Access Control Implementation. / Contract: StakedUSDe.sol / Function: addToBlacklist - removeFromBlacklist",
+  "issueId": 204,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/204"
+}
