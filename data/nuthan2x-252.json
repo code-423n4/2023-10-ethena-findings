@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "nuthan2x",
+  "risk": "3",
+  "title": "`USDe::permit()` Crosschain Signature replay attack, structHash of permit signature data doesnt incluse the chainId.",
+  "issueId": 252,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/252"
+}
