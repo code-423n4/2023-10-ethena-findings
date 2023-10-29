@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "lsaudit",
+  "risk": "2",
+  "title": "Malicious user may block others from unstaking, by calling `cooldownAssets()` and increase legitimate users' cooldown",
+  "issueId": 307,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/307"
+}
