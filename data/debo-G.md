@@ -30,7 +30,6 @@ When internal functions are built and not called then they cost unnecessary gas 
 **Locations**
 ```txt
 /contracts/StakedUSDe.sol#L245-L252
-
 ```
 **Remediation**
 If internal functions are not being called then remove them from the contract.
