@@ -1,6 +1,6 @@
 ## **1. Codebase Reveiew**
 ### **1.1 General Review**
-  - Ethena offers a permissionless stable coin `USDe` and yields to users in its ecosystem. Users can stake their `USDe` in exchange for stUSDe, which increases in value relative to USDe as the protocol earns yield.
+  - Ethena offers a permissionless stable coin USDe and yields to users in its ecosystem. Users can stake their `USDe` in exchange for stUSDe, which increases in value relative to USDe as the protocol earns yield.
   - Ethena allows users to earn a yield on their stETH by shorting ETH perps. This is a relatively low-risk strategy, as the long and short positions are offsetting each other. 
   - The generated revenue is distributed to users by sending it to an insurance fund and then to the staking contract every 8 hours. This means that Ethena users can earn a higher yield on their stETH than they could by simply staking it.
   - To maintain delta neutrality, The long stETH and short ETH perps creates a position with value that's fixed to the time of it's creation.
@@ -11,7 +11,7 @@
 ##### Minting & Redeeming contract
   - [EthenaMinting.sol](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol) - is the contract mints and redeems USDe in a single transaction. Here, gatekeeper, minter and redeemer roles can be granted and revoked(not admin), tokens can be minted and redeemed, assets can be added into allow and deny lists, and users can add delegates for signing. To prevent excessive minting or redemptions, the max_mint_per_block and max_redeem_per_block features are implemented. 
 ##### Staking contracts
-  - [StakedUSDeV2.sol](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDeV2.sol) - is the contract that allows users to stake their USDe tokens and earn rewards in the form of LST tokens and perpetual yield. The Ethena DAO decides how the rewards are distributed. Depending on if there's a cooldown period set or not, users can withdraw their tokens at anytime (following the ERC4626 standard), or if users have to wait for the cooldown period to expire before they can withdraw their tokens(breaking the ERC4626 standard). During the cooldown period, USDe is sent to the silo contract to hold, from which it is withdrawn to the user.
+  - [StakedUSDeV2.sol](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDeV2.sol) - is the contract that allows users to stake their USDe tokens and earn stUSDe. The Ethena DAO decides how the rewards are distributed. Depending on if there's a cooldown period set or not, users can withdraw their tokens at anytime (following the ERC4626 standard), or if users have to wait for the cooldown period to expire before they can withdraw their tokens(breaking the ERC4626 standard). During the cooldown period, USDe is sent to the silo contract to hold, from which it is withdrawn to the user.
   - [StakedUSDe.sol](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDe.sol) - is like the StakedUSDeV2 contract but without the cooldown period, it instead has the additional functionality of blacklisting certain user types, softly(prevents participation in staking) or fully (full account blacklisting). 
   - [USDeSilo.sol](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/USDeSilo.sol) - stores `USDe` during the stake cooldown process. USDe is withdrawn into the staking contracts to be passed on to the user.
 ##### Access-control contracts
@@ -62,5 +62,7 @@ We approached the audit in 3 general steps after which we generated our report.
 
 
 
+
+
 ### Time spent:
-29 hours
+30 hours
