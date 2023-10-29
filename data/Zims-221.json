@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Zims",
+  "risk": "2",
+  "title": "`addSupportedAsset()` doesn't check if it is a EOA or a contract",
+  "issueId": 221,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/221"
+}
