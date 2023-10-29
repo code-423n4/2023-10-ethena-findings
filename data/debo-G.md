@@ -23,3 +23,14 @@ Within abi.encode(), the main types are padded to 32 bytes with dynamic arrays i
 ```
 **Remediation**
 If not required, then utilise abi.encodePacked() rather than abi.encode().
+## [G-03] Functions that are internal are not being called
+There are internal functions that are not being called anywhere in the contract.
+Internal functions are able to be called just within that contracts, and they are not being called within the contract. 
+When internal functions are built and not called then they cost unnecessary gas and are more complicated.
+**Locations**
+```txt
+/contracts/StakedUSDe.sol#L245-L252
+
+```
+**Remediation**
+If internal functions are not being called then remove them from the contract.
