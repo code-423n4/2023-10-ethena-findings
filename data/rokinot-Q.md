@@ -57,3 +57,11 @@ The cooldown is set to the maximum duration possible, which is 90 days. Consider
 The way the contract tracks unique nonces is by storing an invalidator amount and an invalidator bit as indexes. But there's an uint64 conversion to the nonce, which means values above `2^64^` will silently overflow.
 
 So for example, if 2^64 + 1 is submitted, this will invalidate the nonce of number 1. According to the developers in the discord channel, a random number can be submitted as a nonce. This behavior should be discouraged in favor of a sequential nonce submission in order to prevent a possible collision. Alternatively, remove the type conversion to uint64.
+
+### Unnecessary type conversion
+
+In both cooldownAssets() and cooldownShares() functions, there's a type conversion of `block.timestamp` that serves no purpose in the code, as shown below. Consider removing it.
+
+```solidity
+    cooldowns[owner].cooldownEnd = uint104(block.timestamp) + cooldownDuration;
+```
