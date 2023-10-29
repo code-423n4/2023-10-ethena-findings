@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Jorgect",
+  "risk": "2",
+  "title": "Malicius user can use the contract to swap between assets without pay a fee or even perfom malicius swaps.",
+  "issueId": 322,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/322"
+}
