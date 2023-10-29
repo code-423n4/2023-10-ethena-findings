@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "Collateral ratio not validated, allowing profitable arbitrage and fund drain.",
+  "issueId": 227,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/227"
+}
