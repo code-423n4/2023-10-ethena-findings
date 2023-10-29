@@ -1,4 +1,4 @@
-Incorrect Calculation in the `transferInRewards()`
+1. Incorrect Calculation in the `transferInRewards()`
 
 https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/StakedUSDe.sol#L89C1-L99C4
 
@@ -14,5 +14,25 @@ function transferInRewards(uint256 amount) external nonReentrant onlyRole(REWARD
     IERC20(asset()).safeTransferFrom(msg.sender, address(this), amount);
 
     emit RewardsReceived(amount, newVestingAmount);
+  }
+```
+
+
+
+
+2. It is recommended to remove the `notOwner(target)` restriction in `removeFromBlacklist()` function
+
+https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/StakedUSDe.sol#L120C1-L127C4
+
+In the `removeFromBlacklist()` function, the requirement for the input parameter target is that it should not be the `owner`. However, in extreme cases, a potential `owner` can be blacklisted before becoming the actual `owner`. Therefore, it is advisable to remove the restriction of `notOwner(target)` in case of such scenarios.
+
+```
+  function removeFromBlacklist(address target, bool isFullBlacklisting)
+    external
+    onlyRole(BLACKLIST_MANAGER_ROLE)
+    notOwner(target)
+  {
+    bytes32 role = isFullBlacklisting ? FULL_RESTRICTED_STAKER_ROLE : SOFT_RESTRICTED_STAKER_ROLE;
+    _revokeRole(role, target);
   }
 ```
