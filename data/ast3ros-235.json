@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "ast3ros",
+  "risk": "2",
+  "title": "Soft-Restricted Stakers Can Improperly Withdraw stUSDe for USDe",
+  "issueId": 235,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/235"
+}
