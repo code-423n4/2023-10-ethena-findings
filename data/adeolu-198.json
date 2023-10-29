@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "adeolu",
+  "risk": "2",
+  "title": "users still forced to follow previously set cooldownDuration even when cooldown is off (set to zero) before unstaking",
+  "issueId": 198,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/198"
+}
