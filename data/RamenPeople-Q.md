@@ -128,3 +128,88 @@ It is important that the approach is consistent and present throughout the entir
 a) add a similar check for `amount` to the `transferToCustody` function - this will allow for clearer error logging.
 b) remove the verification for `amount` in the `_transferToBeneficiary` function - this will allow for slightly lower gas consumption when calling the function.
 
+# Downcasting leading to reverts
+
+## Impact
+The nonce parameter in `verifyNonce` function (https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol#L379) is of `uint256` type, but it is downcasted to `uint64`. The nonces that are greater than `2**64` are treated the same as their smaller versions (downcasted). 
+
+Therefore, some transactions with high nonces can be reverted even though they were accepted by the backend (minter).
+
+## Proof of Concept
+See the scenario below:
+1. Alice submits an order with nonce equal to 1.
+2. `EthenaMinting` verifies the order and mints shares for Alice.
+3. Alice submits new order with the same type and nonce equal to `2**100 + 1`.
+4. The transaction is reverted.
+
+See the PoC where the second deposit should not revert:
+```solidity
+contract EthenaMintingAudit is MintingBaseSetup {
+
+  function testHighNonceOrder() public {
+
+    IEthenaMinting.Order memory order;
+    IEthenaMinting.Signature memory takerSignature;
+    IEthenaMinting.Route memory route;
+
+    (order, takerSignature, route) = mint_setup(_usdeToMint/3, _stETHToDeposit/3, 1, false);
+
+    vm.prank(minter);
+    EthenaMintingContract.mint(order, route, takerSignature);
+
+
+    (order, takerSignature, route) = mint_setup(_usdeToMint/3, _stETHToDeposit/3, 2**160 + 1, false);
+
+    vm.prank(minter);
+    EthenaMintingContract.mint(order, route, takerSignature);
+  }
+
+}
+```
+
+## Tools Used
+Manual review
+
+## Recommended Mitigation Steps
+Do not downcast the nonce.
+
+# Invalid amount on tokens with fee on minting
+
+## Lines of code
+https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol#L426
+
+## Impact
+The `EthenaMining` contract does not check what was the exact amount of tokens transferred in `_transferCollateral` function. That can lead to incorrect values when integrating with tokens that support fee-on-transfer.
+
+The impact has been lowered to Low because there is a whitelist of supported asset tokens however it might be forgotten when adding a new asset token.
+
+## Proof of Concept
+The  `_transferCollateral` function takes for granted that the following call will deliver `amountToTransfer` tokens to the custody:
+```solidity
+for (uint256 i = 0; i < addresses.length; ++i) {
+      uint256 amountToTransfer = (amount * ratios[i]) / 10_000;
+      token.safeTransferFrom(benefactor, addresses[i], amountToTransfer);
+      totalTransferred += amountToTransfer;
+    }
+```
+
+## Tools Used
+Manual review
+
+## Recommended Mitigation Steps
+Calculate the actual amount transferred by subtracting the balance after and before the transfer and check whether it is equal to the amount to be transferred.
+
+# Make disabling redeeming temporal
+
+## Lines of code
+https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol#L229 
+
+## Impact
+The `disableMintRedeem` function is used to pause minting and redeeming USDe. The addresses with roles `GATEKEEPER_ROLE` and `DEFAULT_ADMIN_ROLE` (indirectly) can do that without any time constraints. 
+This is especially important in the case of redeeming because people should be assured that they will be able to redeem eventually.
+
+## Tools Used
+Manual review
+
+## Recommended Mitigation Steps
+Add a cooldown period for disabling redeeming that, in case of no operations from admin and gatekeepers, will enable again redeeming with the same parameters that were present before disabling.
