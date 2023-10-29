@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "young",
+  "risk": "2",
+  "title": "`addToBlacklist` Function can be frontrunned and thus no funds will be locked",
+  "issueId": 288,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/288"
+}
