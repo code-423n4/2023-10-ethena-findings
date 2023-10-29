@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xweb3boy",
+  "risk": "2",
+  "title": "Redeem() will DoS if assets are not native token and the amount is a wrong input",
+  "issueId": 285,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/285"
+}
