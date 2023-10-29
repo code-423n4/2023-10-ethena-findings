@@ -98,5 +98,7 @@ My attempt on reviewing the in-scope codebase spanned 12 hours distributed over 
 The codebase was a very great learning experience, though it was a pretty hard nut to crack, being that it's like an update contest and most _easy to catch_ bugs have already been spotted and mitigated from the previous contest.
 
 
+
+
 ### Time spent:
-10 hours
+11 hours
