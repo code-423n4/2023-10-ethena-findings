@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xbrett8571",
+  "risk": "2",
+  "title": "Race condition: Attacker reuses nonce before legitimate transaction, causing fund loss.",
+  "issueId": 226,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/226"
+}
