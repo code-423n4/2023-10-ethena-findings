@@ -55,10 +55,12 @@ We approached the audit in 3 general steps after which we generated our report.
   - Test coverage should be imporved from about 70%. It helps to catch basic bugs and improves code modularity.
   - Nonces should be safely casted to prevent oveflows.
   - OZ version should also be updated to the latest (5.0) as of time of auditing, to get the latest features and protections.
-  - Also, we did notice an account can both be fully and softly restricted. Although this doesn't seem to affect the whole protocol, we recommend revoking one role, if it exists before granting the other.
+  - Also, we did notice an account can both be fully and softly restricted. Although this doesn't seem to affect the whole protocol, we recommend revoking one role, if it exists before granting the other (switching). Directly revoking the blacklist will be easier, since the function will not have to be called twice on an address. 
   - Care should be taken when granting privileged roles so as not to grant an account more than one role (e.g granting a gatekeeper minter/redeemer role, owner granting himself minter role etc) to improve decentralization.
   - Above all, we recommend mitigting discovered issues, implementing constant upgrades and audits to keep the protocol always secure.
    
+
+
 
 
 
