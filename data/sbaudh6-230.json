@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "sbaudh6",
+  "risk": "3",
+  "title": "Logical Error in Smart Contract leads to Disrupt the calculation in getUnvestedAmount() Function.",
+  "issueId": 230,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/230"
+}
