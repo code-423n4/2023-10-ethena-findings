@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "aariiif",
+  "risk": "2",
+  "title": "CooldownDuration limitation to 194 days due to uint24 variable.",
+  "issueId": 306,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/306"
+}
