@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Dastan",
+  "risk": "2",
+  "title": "Lack of Admin Control Over Mint and Redeem Limits on the `EthenaMinting.sol` contract",
+  "issueId": 298,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/298"
+}
