@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xStalin",
+  "risk": "2",
+  "title": "Changing the approved minter in the USDe contract will cause all the delegations to be resetted and will require benefactors to set signers again as well as granting allowance to the new minter contract",
+  "issueId": 346,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/346"
+}
