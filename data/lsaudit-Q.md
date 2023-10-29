@@ -144,6 +144,74 @@ Whenever we revoke role from `target` (by calling `removeFromBlacklist()`), we s
 In file `StakedUSDe.sol`, functions `addToBlacklist()` and `removeFromBlacklist()` do not emit any events.
 Consider emitting events whenever user is being blacklisted/removed from the blacklist
 
+# [QA-10] Documentation and codebase defining `DEFAULT_ADMIN_ROLE` can be misleading
+
+Documentation states, that:
+```
+The DEFAULT_ADMIN_ROLE, also our ethena multisig, is required to re-enable minting/redeeming. 
+DEFAULT_ADMIN_ROLE also has the power to add/remove GATEKEEPERS,MINTER and REDEEMER.
+```
+
+which implies, that there's only one `DEFAULT_ADMIN_ROLE` across the whole protocol - and it's Ethena multisig.
+
+The code base states, that we cannot grant additional `DEFAULT_ADMIN_ROLE`:
+
+[File: SingleAdminAccessControl.sol](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/SingleAdminAccessControl.sol#L38)
+```
+/// @notice admin role cannot be granted externally
+  /// @param role bytes32
+  /// @param account address
+  function grantRole(bytes32 role, address account) public override onlyRole(DEFAULT_ADMIN_ROLE) notAdmin(role) {
+    _grantRole(role, account);
+  }
+```
+
+which also implies, that there can only be one `DEFAULT_ADMIN_ROLE`.
+
+
+However, when we look at `EthenaMinting.sol`:
+
+[File: EthenaMinting.sol](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L111)
+```
+constructor(
+    IUSDe _usde,
+    address[] memory _assets,
+    address[] memory _custodians,
+    address _admin,
+    uint256 _maxMintPerBlock,
+    uint256 _maxRedeemPerBlock
+  ) {
+    if (address(_usde) == address(0)) revert InvalidUSDeAddress();
+    if (_assets.length == 0) revert NoAssetsProvided();
+    if (_admin == address(0)) revert InvalidZeroAddress();
+    usde = _usde;
+
+    _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+
+    for (uint256 i = 0; i < _assets.length; i++) {
+      addSupportedAsset(_assets[i]);
+    }
+
+    for (uint256 j = 0; j < _custodians.length; j++) {
+      addCustodianAddress(_custodians[j]);
+    }
+
+    // Set the max mint/redeem limits per block
+    _setMaxMintPerBlock(_maxMintPerBlock);
+    _setMaxRedeemPerBlock(_maxRedeemPerBlock);
+
+    if (msg.sender != _admin) {
+      _grantRole(DEFAULT_ADMIN_ROLE, _admin);
+    }
+```
+
+we can spot, that actually, there could be two users with `DEFAULT_ADMIN_ROLE`.
+
+The first one - `_grantRole(DEFAULT_ADMIN_ROLE, msg.sender);` - `msg.sender` who deployed the contract
+The second one - ` _grantRole(DEFAULT_ADMIN_ROLE, _admin);` - `_admin` passed in `_admin` parameter
+
+Please make sure to standardize the documentation - to make it straightforwardly clear that there could be more than one `DEFAULT_ADMIN_ROLE` in the whole protocol. The first `DEFAULT_ADMIN_ROLE` - `msg.sender` who called `constructor()`, the 2nd `DEFAULT_ADMIN_ROLE` - `_admin` address from the `constructor()`.
+
 # [N-01] Typo in documentation
 
 [File: README.md](https://github.com/code-423n4/2023-10-ethena/blob/main/README.md)
