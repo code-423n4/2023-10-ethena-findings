@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "sorrynotsorry",
+  "risk": "2",
+  "title": "removeCustodian doesn't validate the address being removed is the last one.",
+  "issueId": 241,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/241"
+}
