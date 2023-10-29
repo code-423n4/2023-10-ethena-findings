@@ -4,8 +4,8 @@ code from L423-L432 replaces as below, the following code can reduce one iterati
 
 ```
     uint256 len = addresses.length;
-    uint256 totalTransferred = 0;
-    for (uint256 i = 0; i < len - 1; ) {
+    uint256 totalTransferred;
+    for (uint256 i; i < len - 1; ) {
       uint256 amountToTransfer = (amount * ratios[i]) / 10_000;
       token.safeTransferFrom(benefactor, addresses[i], amountToTransfer);
       totalTransferred += amountToTransfer;
