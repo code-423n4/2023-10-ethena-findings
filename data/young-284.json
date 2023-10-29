@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "young",
+  "risk": "3",
+  "title": "User's fund may get stuck due to improper extension of `cooldownEnd` time",
+  "issueId": 284,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/284"
+}
