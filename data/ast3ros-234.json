@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "ast3ros",
+  "risk": "2",
+  "title": "The Mint and Redeem Functions are Vulnerable to DoS Attacks",
+  "issueId": 234,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/234"
+}
