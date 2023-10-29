@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Cosine",
+  "risk": "2",
+  "title": "Missing check allows soft restricted users to withdraw",
+  "issueId": 248,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/248"
+}
