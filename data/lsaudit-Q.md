@@ -106,7 +106,43 @@ Due to legal requirements, there's a SOFT_RESTRICTED_STAKER_ROLE and FULL_RESTRI
 
 However, I think that it might be a good idea, to make this role a little more restrictive.
 
+# [QA-8] Before adding/removing role, make sure that user already has that role
 
+Whenever we `_grantRole` via `addToBlacklist()` function - there's no check if user already has that role. This implies, that it's possible to assign the same role to the user who already has that role.
+
+Whenever we `_revokeRole` via `removeFromBlacklist()` function - there's no check if user really has that role. This implies, that it's possible to revoke a role from user who hasn't got that role (in that case, nothing will change, if user doesn't have a role and `removeFromBlacklist()` is being called on him - he still won't have that role).
+
+[File: StakedUSDe.sol](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/StakedUSDe.sol#L106)
+```
+ function addToBlacklist(address target, bool isFullBlacklisting)
+    external
+    onlyRole(BLACKLIST_MANAGER_ROLE)
+    notOwner(target)
+  {
+    bytes32 role = isFullBlacklisting ? FULL_RESTRICTED_STAKER_ROLE : SOFT_RESTRICTED_STAKER_ROLE;
+    _grantRole(role, target);
+  }
+
+ (...)
+
+  function removeFromBlacklist(address target, bool isFullBlacklisting)
+    external
+    onlyRole(BLACKLIST_MANAGER_ROLE)
+    notOwner(target)
+  {
+    bytes32 role = isFullBlacklisting ? FULL_RESTRICTED_STAKER_ROLE : SOFT_RESTRICTED_STAKER_ROLE;
+    _revokeRole(role, target);
+  }
+```
+
+Whenever we grant role to `target` (by calling `addToBlacklist()`), we should check if `target` already hasn't that role.
+Whenever we revoke role from `target` (by calling `removeFromBlacklist()`), we should check if `target` already has that role.
+
+
+# [QA-9] Lack of event emission when adding to/removing from the blacklist
+
+In file `StakedUSDe.sol`, functions `addToBlacklist()` and `removeFromBlacklist()` do not emit any events.
+Consider emitting events whenever user is being blacklisted/removed from the blacklist
 
 # [N-01] Typo in documentation
 
