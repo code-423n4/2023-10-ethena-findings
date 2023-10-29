@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Inspecktor",
+  "risk": "3",
+  "title": "EthenaMinting.redeem() cannot be executed due to lack of allowance for the burnFrom() function.",
+  "issueId": 267,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/267"
+}
