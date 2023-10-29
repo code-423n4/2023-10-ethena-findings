@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "adeolu",
+  "risk": "2",
+  "title": "cooldown for previous withdrawal/redeem is reset to highest coolDownDuration time  if user restakes in StakedUSDeV2 and tries to do another withdrawal before the previous withdrawal coolDown time elaspes/ is completed. ",
+  "issueId": 263,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/263"
+}
