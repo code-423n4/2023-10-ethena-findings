@@ -12,5 +12,5 @@ code from L423-L432 replaces as below, the following code can reduce one iterati
       unchecked {++i};
     }
     uint256 remainingBalance = amount - totalTransferred;
-    token.safeTransferFrom(benefactor, addresses[addresses.length - 1], remainingBalance);
+    token.safeTransferFrom(benefactor, addresses[len - 1], remainingBalance);
 ```
