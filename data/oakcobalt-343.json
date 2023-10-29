@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "oakcobalt",
+  "risk": "2",
+  "title": "No slippage check for minting and redeeming order, might result in under-collateralization",
+  "issueId": 343,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/343"
+}
