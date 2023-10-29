@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xAlix2",
+  "risk": "3",
+  "title": "Users can get orders executed (mint/redeem) while passing other orders' signature",
+  "issueId": 240,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/240"
+}
