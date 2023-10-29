@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xbrett8571",
+  "risk": "3",
+  "title": "Frontrunning in EthenaMinting's per-block limits enables denial of service.",
+  "issueId": 228,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/228"
+}
