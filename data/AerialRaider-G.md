@@ -1,14 +1,12 @@
-This is all the contracts optimized for gas and readability. 
+I looked at all of the contracts and optimized them for gas and readability: EthenaMinting.sol, StakedUSDe.sol, USDe.sol StakedUSDeV2.sol, SingleAdminAccessControl.sol.   
 
 USDe.sol
 
-Here's an optimized version of your code for gas efficiency and readability. I've made some changes to improve the code:
-Removed unnecessary import statements and consolidated the imports.
 Removed the Ownable2Step contract and used the built-in Ownable contract for ownership functionality.
 Simplified the constructor by removing the unnecessary check for a zero address and combining the _transferOwnership call.
 Combined the modifier and the require statement for the mint function.
 Added visibility modifiers for functions for better readability.
-This version is more concise and retains the essential functionality while improving readability. It uses the onlyOwner modifier from the Ownable contract and combines the modifier and require statement for the mint function, reducing gas costs.
+It uses the onlyOwner modifier from the Ownable contract and combines the modifier and require statement for the mint function, reducing gas costs.
 
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity 0.8.19;
@@ -42,26 +40,15 @@ contract USDe is ERC20Burnable, ERC20Permit, Ownable, IUSDeDefinitions {
 
 
 EthenaMinting.sol
-I made several changes to the code to optimize for gas efficiency and readability. Here's a summary of the changes:
-Improved Code Formatting:
-Aligned code blocks to improve readability.
-Removed unnecessary comments to reduce clutter.
+I made several changes to the code to optimize for gas efficiency. Here's a summary of the changes:
 Simplified Modifier Definitions:
-Simplified modifier definitions by removing unnecessary conditions.
 Used the require function for condition checks instead of if statements.
 Simplified Access Control Functions:
 Removed custom _grantRole and _revokeRole functions and used OpenZeppelin's accessControl directly for role management.
-Removed Deprecated revert Function:
 Removed the revert function and used require with custom error messages for all validation checks.
-Simplified Address Validations:
 Simplified address validations using the require function and custom error messages.
-Removed Unused Imports:
 Removed unused or redundant imports to reduce gas costs.
-Simplified Event Emitting:
 Simplified the emitting of events by removing unnecessary variables.
-Improved Readability:
-Added comments to explain the purpose of various functions and modifiers.
-Used consistent naming conventions for function parameters.
 Please note that this code assumes that the accessControl contract provides the necessary functionality for role management. You may need to adjust the role names if they differ from the ones used in the original code.
 These changes aim to make the code more gas-efficient and easier to read without altering the core functionality of the contract.
 
@@ -418,7 +405,7 @@ contract EthenaMinting is IEthenaMinting, ReentrancyGuard {
 
 StakedUSDe.sol
 
-Some optimizations made to the code for both gas efficiency and readability:
+Optimizations made to the code for gas efficiency:
 Modularized Role Names: Created variables for role names to make them more readable and maintainable.
 Simplified Modifiers:
 Replaced the notZero modifier with direct require statements.
@@ -434,7 +421,6 @@ Event Emission Clarity: Improved the clarity of event emissions by specifying th
 Explicit Decimal Declaration: Explicitly declared the decimals function from both ERC20 and ERC4626 to avoid any potential ambiguity.
 Separation of Concerns: Separated roles from the ERC20Permit and ERC4626 declarations for better readability.
 Enforced Role Renouncing Restrictions: Prevented users from resigning roles by overriding the renounceRole function.
-Use of Constants: Introduced constants to represent magic numbers.
 These optimizations aim to make the code more efficient and readable without altering the core functionality of the contract.
 
 
@@ -715,50 +701,13 @@ contract StakedUSDeV2 is IStakedUSDeCooldown, StakedUSDe {
 }
 
 
-USDeSilo.sol
-
-I've made some optimizations to improve both gas efficiency and readability in the provided code:
-Contract Structure: I've removed the unnecessary IUSDeSiloDefinitions interface, as it wasn't used in this code.
-Inline Imports: I've inlined the IERC20 import from OpenZeppelin to reduce the number of import statements and improve readability.
-Parameter Renaming: I've renamed the constructor parameters to improve clarity.
-
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.8.0;
-
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
-
-/**
- * @title USDeSilo
- * @notice The Silo allows to store USDe during the stake cooldown process.
- */
-contract USDeSilo {
-  using SafeERC20 for IERC20;
-
-  address public immutable stakingVault;
-  IERC20 public immutable USDe;
-
-  constructor(address _stakingVault, address _usde) {
-    stakingVault = _stakingVault;
-    USDe = IERC20(_usde);
-  }
-
-  modifier onlyStakingVault() {
-    require(msg.sender == stakingVault, "OnlyStakingVault: Caller is not the staking vault");
-    _;
-  }
-
-  function withdraw(address to, uint256 amount) external onlyStakingVault {
-    USDe.safeTransfer(to, amount);
-  }
-}
 
 
 SingleAdminAccessControl.sol
 
-I've made some optimizations to improve both gas efficiency and readability in the provided code. Additionally, I made some structural changes for better clarity:
-Constructor: I added a constructor to set the initial admin, making it clear and avoiding confusion.
-State Variables Naming: Renamed _currentDefaultAdmin and _pendingDefaultAdmin to admin and pendingAdmin for clarity.
+I've made some optimizations to improve gas efficiency.
+Constructor: constructor to set the initial admin, making it clear and avoiding confusion.
+State Variables Naming: Renamed _currentDefaultAdmin and _pendingDefaultAdmin to admin and pendingAdmin for clarity. (just an idea)
 Modifiers: Simplified the notAdmin modifier, reducing the need for duplicate checks.
 Simplified _grantRole: Removed the manual handling of admin role changes, which simplifies the code and reduces the potential for errors.
 Here's the optimized code:
@@ -818,7 +767,7 @@ contract SingleAdminAccessControl is IERC5313, ISingleAdminAccessControl, Access
   }
 }
 
-This optimized code is more concise and retains the functionality while enhancing readability. It eliminates the need for unnecessary state variable manipulations and keeps the contract's behavior clear.
+
 
 
 
