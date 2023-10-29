@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "nuthan2x",
+  "risk": "2",
+  "title": " [`StakedUSDe::transferInRewards()`](https://github.com/code-423n4/2023-10-ethena/blob/d361ced0f57005a1b80c7d01673e17582847aaed/protocols/USDe/contracts/StakedUSDe.sol#L89) Accounting issue/wrong implementation of `newVestingAmount`",
+  "issueId": 254,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/254"
+}
