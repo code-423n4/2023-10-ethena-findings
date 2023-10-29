@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "young",
+  "risk": "2",
+  "title": "Potential Unfair Cooldown period due to the setup of `cooldownEnd`",
+  "issueId": 277,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/277"
+}
