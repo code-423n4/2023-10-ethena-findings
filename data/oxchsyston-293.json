@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "oxchsyston",
+  "risk": "2",
+  "title": "Code does not follow the `NatSpec` as users can redeem their assets without  the countdown control.",
+  "issueId": 293,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/293"
+}
