@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xComfyCat",
+  "risk": "2",
+  "title": "(M-01) USDe redemption with native asset can grief protocol by calling to malicious beneficiary contract",
+  "issueId": 278,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/278"
+}
