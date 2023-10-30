@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "JCK",
+  "risk": "2",
+  "title": "## [M-04] Risk of Unvalidated Admin Role Transfer",
+  "issueId": 595,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/595"
+}
