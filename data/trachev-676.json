@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "trachev",
+  "risk": "2",
+  "title": "Malicious user can completely prevent all users or users without large funds from staking",
+  "issueId": 676,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/676"
+}
