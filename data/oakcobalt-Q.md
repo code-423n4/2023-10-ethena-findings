@@ -101,3 +101,6 @@ Recommendations:
 (1)Either only allow one time withdraw per cooldown period and revert when user's `cooldownEnd` is non-zero;
 (2)Or if asset is allowed to be addded before an existing cooldown, consider use a mapping to track `cooldownEnd` key with the corresponding `underlyingAmount`.
 
+### Low 05 - No on-chain check to ensure mint, redeem will always submit a benefactor's nonce in an incrementing manner
+
+In EthenaMinting.sol - `mint()` and `redeem()`, only `MINTER_ROLE` and `REDEEMER_ROLE` can submit `mint()` and `redeem()` order. Trust has to be placed on `MINTER_ROLE` and `REDEEMER_ROLE` 
