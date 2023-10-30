@@ -54,8 +54,6 @@
 | [NC-08](#NC-08)   | Don't assign role on `msg.sender` | _Non Critical_ |
 | [NC-09](#NC-09)   | It is [recommended](https://github.com/ethereum/eips/issues/155) to use deadline for [meta-transactions](https://medium.com/coinmonks/complete-guide-to-meta-transactions-c46ca51dbd21) | _Non Critical_ |
 | [NC-10](#NC-10)   | Lack of Event Emitting on Important for the Protocol functions | _Non Critical_ |
-| [NC-11](#NC-11)   | `delegatedSigner` race condition like `ERC20 approve` | _Non Critical_ |
-
 
 ##
 
@@ -420,7 +418,6 @@ Overall - This is bad solution. Better use approach like in UniswapV3.
 
 ## [NC-10] Lack of Event Emitting on Important for the Protocol functions
 
-
 ### Summary
 The protocol currently lacks event emission in several crucial functions, which can hinder transparency and make tracking important actions challenging. Here are the instances where events are missing:
 1. `USDe.sol#mint()`: The `mint()` function in the USDe contract does not emit an event when new tokens are minted, making it difficult to track and verify minting activities.
@@ -431,10 +428,5 @@ The protocol currently lacks event emission in several crucial functions, which 
 6. For StakedUSDeV2: `withdraw()`, `redeem()`, `unstake()`: These functions do not emit events, which can hinder monitoring and auditing processes.
 
 Adding appropriate events to these functions would greatly improve the protocol's transparency and auditability.
-
----
-
-## [NC-11] `delegatedSigner` race condition like `ERC20 approve`
-
 
 ---
