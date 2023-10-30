@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "twcctop",
+  "risk": "2",
+  "title": "`transferInRewards` should  check  vault is empty or  not .",
+  "issueId": 469,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/469"
+}
