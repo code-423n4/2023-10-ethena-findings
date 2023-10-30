@@ -81,3 +81,18 @@ https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0c
 
 Even if a staker was released from one restriction role, it can be restricted by the other role.
 So when adding or removing a restriction role, then either role should be considered in `addToBlacklist()` and `removeFromBlacklist()`.
+
+## L-05. It would be ideal to reset `vestingAmount` in `StakingUSDe`
+I would highly suggest resetting `vestingAmount` in the below:
+```
+  function getUnvestedAmount() public view returns (uint256) {
+    uint256 timeSinceLastDistribution = block.timestamp - lastDistributionTimestamp;
+
+    if (timeSinceLastDistribution >= VESTING_PERIOD) {
+      vestingAmount = 0; // -> Here, set vestingAmount to 0
+      return 0;
+    }
+
+    return ((VESTING_PERIOD - timeSinceLastDistribution) * vestingAmount) / VESTING_PERIOD;
+  }
+```
