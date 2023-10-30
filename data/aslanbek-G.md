@@ -94,7 +94,7 @@ Change uint104 to uint256:
 ```
 # [G-07] Dead code
 
-`EthenaMinting#_deduplicateOrder` either reverts or returns true. The `!_deduplicateOrder` check is not needed.
+`EthenaMinting#_deduplicateOrder` either reverts or returns true. The `!_deduplicateOrder` check is not needed and `error Duplicate()` will never be thrown.
 
 [EthenaMinting.sol#L172](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L172)
 [EthenaMinting.sol#L203](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L203)
