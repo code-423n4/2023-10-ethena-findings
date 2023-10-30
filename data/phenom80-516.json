@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "phenom80",
+  "risk": "2",
+  "title": "Unsafe use of transfer()/transferFrom() with IERC20",
+  "issueId": 516,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/516"
+}
