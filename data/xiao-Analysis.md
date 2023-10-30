@@ -15,7 +15,7 @@
 ## a) The approach I followed when reviewing the code
 
 Determine the scope of code audit:
-https://github.com/code-423n4/2023-10-brahma
+https://github.com/code-423n4/2023-10-ethena
 
 | Number | Stage                | Details                                                                                                             | Information                                                                      |
 | :----- | :------------------- | :------------------------------------------------------------------------------------------------------------------ | :------------------------------------------------------------------------------- |
@@ -382,6 +382,8 @@ https://github.com/code-423n4/2023-10-ethena/tree/main/audit
 ## Time spent
 
 35 hours
+
+
 
 
 ### Time spent:
