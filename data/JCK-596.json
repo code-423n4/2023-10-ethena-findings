@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "JCK",
+  "risk": "2",
+  "title": "## [M-05] Risk of Incorrect Native Token Address Assignment",
+  "issueId": 596,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/596"
+}
