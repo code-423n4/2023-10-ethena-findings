@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "seerether",
+  "risk": "3",
+  "title": "The owner can potentially steal staked assets like stUSDe tokens that should not be rescued.",
+  "issueId": 428,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/428"
+}
