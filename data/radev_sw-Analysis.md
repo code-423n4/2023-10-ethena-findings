@@ -424,11 +424,13 @@ Lets illustrate the following example:
 
 - Manual Inspection
 
+### 
+
+After all, I observed that users who have already called `cooldownAssets()/cooldownShares()` can call the `unstake()` function again to retrieve their converted underlying asset.
+
 ---
 
-After all I saw that users that already `cooldownAssets()/cooldownShares()` can again call `unstake()` function to get their converted underlying asset.
-
----
+### 
 
 ### Time spent:
 35 hours
