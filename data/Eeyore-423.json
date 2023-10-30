@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Eeyore",
+  "risk": "2",
+  "title": "Full restricted account can bypass restriction when depositing to staking contract",
+  "issueId": 423,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/423"
+}
