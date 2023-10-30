@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "monrel",
+  "risk": "3",
+  "title": "Minter can censor GATEKEEPER and mint for a prolonged period of time",
+  "issueId": 601,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/601"
+}
