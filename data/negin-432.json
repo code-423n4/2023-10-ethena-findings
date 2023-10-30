@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "negin",
+  "risk": "2",
+  "title": "Duplicate addresses and ratios are not checked during transferring the collaterals",
+  "issueId": 432,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/432"
+}
