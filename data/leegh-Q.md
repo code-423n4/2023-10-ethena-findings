@@ -1,3 +1,39 @@
+# Low
+1. "owner" is not allowed to add/remove black list.
+
+Function "addToBlacklist" and "removeFromBlacklist" are limited to called by BLACKLIST_MANAGER_ROLE only. But the owner is also allowed to call them according to the function notice.
+```solidity
+101:  /**
+102:   * @notice Allows the owner (DEFAULT_ADMIN_ROLE) and blacklist managers to blacklist addresses.
+103:   * @param target The address to blacklist.
+104:   * @param isFullBlacklisting Soft or full blacklisting level.
+105:   */
+106:  function addToBlacklist(address target, bool isFullBlacklisting)
+107:    external
+108:    onlyRole(BLACKLIST_MANAGER_ROLE)
+109:    notOwner(target)
+110:  {
+111:    bytes32 role = isFullBlacklisting ? FULL_RESTRICTED_STAKER_ROLE : SOFT_RESTRICTED_STAKER_ROLE;
+112:    _revokeRole(role, target);
+113:  }
+
+115:  /**
+116:   * @notice Allows the owner (DEFAULT_ADMIN_ROLE) and blacklist managers to un-blacklist addresses.
+117:   * @param target The address to un-blacklist.
+118:   * @param isFullBlacklisting Soft or full blacklisting level.
+119:   */
+120:  function removeFromBlacklist(address target, bool isFullBlacklisting)
+121:    external
+122:    onlyRole(BLACKLIST_MANAGER_ROLE)
+123:    notOwner(target)
+124：  function rescueTokens(address token, uint256 amount, address to) external onlyRole(DEFAULT_ADMIN_ROLE) {
+125：    if (address(token) == asset()) revert InvalidToken();
+126：    IERC20(token).safeTransfer(to, amount);
+127：  }
+```
+| [Line #101-l13](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDe.sol#L101-113) | [Line #115-127](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDe.sol#L115-127) | 
+
+
 # Non-critical
 1. Parameters and struct members names not mixedCase
 
