@@ -1,3 +1,5 @@
+# QA Report
+
 ## Summary
 
 ### Non-critical Issues
@@ -9,6 +11,7 @@
 | [[N&#x2011;03](#n03-no-need-to-check-address(usde))] | The likelihood of adding `address(usde)` as a custodian address is very low. | 1 |
 | [[N&#x2011;04](#n04-wrong-description)] | Wrong description of `vestingAmount` in `StakedUSDe` contract. | 1 |
 | [[N&#x2011;05](#n05-code-duplication-can-be-reduced)] | Code duplication can be reduced by creating a separate function for repeated code blocks. | 2 |
+| [[N&#x2011;06](#n06-unnecessary-code)] | `newVestingAmount` always equal to `amount` in `StakedUSDe#transferInRewards()` | 1 |
 
 
 ## Non-critical Issues
@@ -191,3 +194,46 @@ Create a separate function for the cooldown.
 
 ```
 
+### [N&#x2011;06] `newVestingAmount` always equal to `amount` in `StakedUSDe#transferInRewards()`
+
+The `transferInRewards` function is used to transfer rewards from the controller contract into the `StakedUSDe` contract. The `getUnvestedAmount()` function will always return zero in the code due to the preceding check (`if (getUnvestedAmount() > 0) revert StillVesting();`). Therefore, adding `getUnvestedAmount()` to the `amount` in the line `uint256 newVestingAmount = amount + getUnvestedAmount();` is unnecessary. 
+
+There are 1 instances:
+
+```solidity
+
+File : contracts/StakedUSDe.sol
+
+  function transferInRewards(uint256 amount) external nonReentrant onlyRole(REWARDER_ROLE) notZero(amount) {
+    if (getUnvestedAmount() > 0) revert StillVesting();
+@>  uint256 newVestingAmount = amount + getUnvestedAmount();
+
+@>  vestingAmount = newVestingAmount;
+    lastDistributionTimestamp = block.timestamp;
+    // transfer assets from rewarder to this contract
+    IERC20(asset()).safeTransferFrom(msg.sender, address(this), amount);
+
+    emit RewardsReceived(amount, newVestingAmount);
+  }
+```
+
+*GitHub*: [89](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/StakedUSDe.sol#L89C1-L99C4)
+
+#### Recommendation 
+
+```diff
+   function transferInRewards(uint256 amount) external nonReentrant onlyRole(REWARDER_ROLE) notZero(amount) {
+     if (getUnvestedAmount() > 0) revert StillVesting();
+-    uint256 newVestingAmount = amount + getUnvestedAmount();
+ 
+-    vestingAmount = newVestingAmount;
++    vestingAmount = amount;
+     lastDistributionTimestamp = block.timestamp;
+     // transfer assets from rewarder to this contract
+     IERC20(asset()).safeTransferFrom(msg.sender, address(this), amount);
+ 
+-    emit RewardsReceived(amount, newVestingAmount);
++    emit RewardsReceived(amount, vestingAmount);
+   }
+
+```
