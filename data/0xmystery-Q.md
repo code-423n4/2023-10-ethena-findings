@@ -136,3 +136,14 @@ https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.s
     return true;
   }
 ```
+## Unneeded function still not removed
+Per Pashov's audit report, L-04 mentioned that the unused `EthenaMinting::encodeRoute` has been removed by Ethena. However, this erroneous function still exists in EthenaMinting.sol. 
+
+https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol#L334-L336
+
+```diff
+-  function encodeRoute(Route calldata route) public pure returns (bytes memory) {
+-    return abi.encode(ROUTE_TYPE, route.addresses, route.ratios);
+-  }
+```
+Consider removing this controversial function where possible. 
