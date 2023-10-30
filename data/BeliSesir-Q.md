@@ -39,14 +39,4 @@ In `StakedUSDe.sol`, in case an attacker were to somehow black list the owner, r
 
 ## Unnecessary operation on line 91 of StakedUSDe.sol
 
-In the `transferInRewards` function, the value of the call to `getUnvestedAmount()` appears guaranteed to be zero based on the `if (getUnvestedAmount() > 0) revert StillVesting();` statement on line 90, so adding the value to the `newVestingAmount` on line 91, `uint256 newVestingAmount = amount + getUnvestedAmount();` seems to be useless. If the expectation is that the value of `getUnvestedAmount()` can be greater than zero, then the condition on line 90 should be reevaluated and changed to allow non-zero values without reverting. 
-
-## Recommend rewording the documentation to rescueTokens
-
-In StakedUSDe.sol line 130 where the comment reads:
-
-    * Note that the owner cannot rescue USDe tokens because they functionally sit here
-    * and belong to stakers but can rescue staked USDe as they should never actually
-    * sit in this contract and a staker may well transfer them here by accident.
-
-Implies that the USDs tokens should both functionally sit there but also never sit there. Recommend rephrasing this to be more clear in reflecting what the actual intention is. 
+In the `transferInRewards` function, the value of the call to `getUnvestedAmount()` appears guaranteed to be zero, based on the `if (getUnvestedAmount() > 0) revert StillVesting();` statement on line 90. So adding the value to the `newVestingAmount` on line 91, `uint256 newVestingAmount = amount + getUnvestedAmount();` seems to be useless. If the expectation is that the value of `getUnvestedAmount()` can be greater than zero, then the condition on line 90 should be reevaluated and changed to allow non-zero values without reverting. 
