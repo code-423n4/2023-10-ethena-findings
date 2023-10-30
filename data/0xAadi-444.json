@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xAadi",
+  "risk": "3",
+  "title": "User can bypass the intended cooldown period by initiating a new cooldown just before the end of the current one, which will effectively resetting the cooldown timer.",
+  "issueId": 444,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/444"
+}
