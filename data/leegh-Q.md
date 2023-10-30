@@ -31,7 +31,7 @@ Function "addToBlacklist" and "removeFromBlacklist" are limited to called by BLA
 126：    IERC20(token).safeTransfer(to, amount);
 127：  }
 ```
-| [Line #101-l13](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDe.sol#L101-113) | [Line #115-127](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDe.sol#L115-127) | 
+| [Line #101-113](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDe.sol#L101-L113) | [Line #115-127](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDe.sol#L115-L127) | 
 
 
 # Non-critical
