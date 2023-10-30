@@ -41,9 +41,9 @@
 
 ```
 
-### <a name="LOW-3"></a>[LOW-3] `StakedUSDe._beforeTokenTransfer` can be frontran by a service.
+### <a name="LOW-3"></a>[LOW-3] `StakedUSDe._beforeTokenTransfer` can be frontran by a bot.
 - Scenario:
-   - whenever a `BLACKLIST_MANAGER_ROLE` makes a tx, it can be searched via mempool and someone with approval of the (to be blacklisted)'s address will transfer the funds to the delegate already set.
+   - whenever a `BLACKLIST_MANAGER_ROLE` makes a tx, it can be searched via mempool and a bot with approval of the (to be blacklisted)'s address will transfer the funds to the delegate already set. Or a owner with key can run a bot to frontrun it.
    - Low likelyhood, should be soled when tx'ns of blacklist manager are sent to flashbots builder.
 - Severity : low
 - Likelihood : Med
