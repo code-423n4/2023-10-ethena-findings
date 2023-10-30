@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "moneyversed",
+  "risk": "3",
+  "title": "Unrestricted access to critical admin functions in `StakedUSDe` due to extremely flawed implementation in `SingleAdminAccessControl`",
+  "issueId": 714,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/714"
+}
