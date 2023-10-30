@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "adeolu",
+  "risk": "2",
+  "title": "approved caller can extend the coolDownEnd time set by owner in the past when owner called coolDownAssets()",
+  "issueId": 514,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/514"
+}
