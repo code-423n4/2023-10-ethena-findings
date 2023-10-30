@@ -3,6 +3,7 @@
 | |Issue|Instances|
 |-|:-|:-:|
 | [L-01](#L-01) | Users can transfer in small amounts before VESTING_PERIOD duration has passed | 1 |
+| [L-02](#L-02) | No check to see whether benefactor/beneficiary are restricted addresses |  |
 
 ## Non-Critical Issues
 
@@ -39,6 +40,14 @@ Suppose
 Similar situation would be if vestingAmount is 1, then Rewarder can call `transferInRewards()` with a huge amount the very next second & rewards will be sent.
 The Rewarder will try calling `transferInRewards()` & it will pass even though VESTING_PERIOD duration hasn't been achieved.
 This enables rewards to be transferred before the set time period. Worst case is that users can transfer in small amounts before the 8 hours criteria. 
+
+## [L-02] No check to see whether benefactor/beneficiary are restricted addresses
+
+Inside `EthenaMinting.sol`, mint() & redeem() are called by the MINTER & REEDEMER respectively. During mint(), the collateral is transferred from the benefactor & during redeem() the collateral is transferred to the beneficiary.
+But there is no check to ensure that the address of either the benefactor or beneficiary are soft/fully restricted. This would break the protocol guidelines as the soft restricted addresses aren't supposed to get USDe tokens minted & there should be no interaction with a fully restricted addresses due to malicious or illegal nature of the address.
+
+It is recommended to add a check for blacklisted addresses in `EthenaMinting.sol` contract.
+
 
 ## [NC-01] Unnecessary check in `verifyRoute()`
 
