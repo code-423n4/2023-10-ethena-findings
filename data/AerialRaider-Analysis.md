@@ -1,4 +1,4 @@
-I went though an optimized each contract of your code for gas efficiency and readability. Then I went over the code to ensure that users can sign EIP712 orders and that the execution is always signed:
+I went though an optimized each contract of your code for gas efficiency. Then I went over the code to ensure that users can sign EIP712 orders and that the execution is always signed:
 I modified the contract's constructor to set the admin address.
 Added functions to allow users to sign EIP712 orders.
 Updated the mint and redeem functions to include user signatures and execute based on the signed values.
@@ -168,9 +168,57 @@ contract USDe is Ownable2Step, ERC20Burnable, ERC20Permit, IUSDeDefinitions {
 
 
 
+To ensure that the "max mint per block" is never exceeded, you can use the provided belowMaxMintPerBlock modifier in the mint function. Here's the modified code with this modifier applied:    
+// ...
+
+/**
+ * @title Ethena Minting
+ * @notice This contract mints and redeems USDe in a single, atomic, trustless transaction
+ */
+contract EthenaMinting is IEthenaMinting, SingleAdminAccessControl, ReentrancyGuard {
+  // ...
+
+  /* --------------- MODIFIERS --------------- */
+  
+  // ...
+
+  modifier belowMaxMintPerBlock(uint256 mintAmount) {
+    if (mintedPerBlock[block.number] + mintAmount > maxMintPerBlock) revert MaxMintPerBlockExceeded();
+    _;
+  }
+
+  // ...
+
+  /* --------------- EXTERNAL --------------- */
+
+  /**
+   * @notice Mint stablecoins from assets
+   * @param order struct containing order details and confirmation from server
+   * @param signature signature of the taker
+   */
+  function mint(Order calldata order, Route calldata route, Signature calldata signature)
+    external
+    override
+    nonReentrant
+    onlyRole(MINTER_ROLE)
+    belowMaxMintPerBlock(order.usde_amount) // Apply the belowMaxMintPerBlock modifier
+  {
+    // ...
+  }
+
+  // ...
+}
+
+
+I added the belowMaxMintPerBlock modifier to the mint function to ensure that the minting operation doesn't exceed the defined "maxMintPerBlock" limit. If the limit is exceeded, the function will revert.
+
+
+
 
 
       
+
+
 
 
 
