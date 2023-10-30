@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "pep7siup",
+  "risk": "2",
+  "title": "Pending cooldowns can be prematurely unstaked if cooldownDuration is shorten in the meantime",
+  "issueId": 523,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/523"
+}
