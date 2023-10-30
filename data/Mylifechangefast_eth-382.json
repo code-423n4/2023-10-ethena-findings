@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Mylifechangefast_eth",
+  "risk": "2",
+  "title": "Owner/admin only functions that change critical parameters should have timelocks. ",
+  "issueId": 382,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/382"
+}
