@@ -1,8 +1,33 @@
-## 1. Unequal Limitation.
-In the context of this protocol, there's a notable discrepancy in the restrictions imposed on the two key participants: the Borrower and the Lender. While it's reasonable for Borrowers to have control over who contributes to their market, it seems unfair that accounts or addresses banned or sanctioned by Chainalysis face strict limitations on lending their funds or having their funds locked in an escrow contract. Borrowers, on the other hand, do not encounter the same level of constraint.
 
-This situation raises concerns, as banned or sanctioned accounts, having access to open information, may attempt to register with the ArchController to circumvent protocol restrictions and facilitate fund movement without hindrance. Additionally, since Borrowers can potentially override Chainalysis outputs, blocked or sanctioned account owners with registered markets could incentivize others in similar situations to deposit in their pool. This could potentially lead to negative attention from governmental authorities, as the protocol may appear to offer a haven for sanctioned addresses and accounts.
+### Redundant Line of Code
+In ```StakedUSDe.transferInRewards()```, a check was done to ensure that ```getUnvestedAmount()``` returns zero, the next line then adds the return value of ```getUnvestedAmount()``` to amount to get ```newVestingAmount```, a computation that seems unnecessary. ```vestingAmount``` could just have been set to equal ```amount``` directly.
+``` solidity
+function transferInRewards(
+        uint256 amount
+    ) external nonReentrant onlyRole(REWARDER_ROLE) notZero(amount) {
+        if (getUnvestedAmount() > 0) revert StillVesting();
+        uint256 newVestingAmount = amount + getUnvestedAmount(); //@audit redundant
 
-A reconsideration of this design is encouraged, as it poses potential challenges. Even if the protocol opts to unregister a Borrower, the risk of others entering remains, necessitating a more balanced approach to address these issues.
+        vestingAmount = newVestingAmount;
+        lastDistributionTimestamp = block.timestamp;
+        // transfer assets from rewarder to this contract
+        IERC20(asset()).safeTransferFrom(msg.sender, address(this), amount);
 
-In my personal opinion, borrowers should not be given the power to over.
+        emit RewardsReceived(amount, newVestingAmount);
+    }
+```
+remove the redundant line of code.
+``` solidity
+function transferInRewards(
+        uint256 amount
+    ) external nonReentrant onlyRole(REWARDER_ROLE) notZero(amount) {
+        if (getUnvestedAmount() > 0) revert StillVesting();
+   
+        vestingAmount = amount; //set vestingAMount directly
+        lastDistributionTimestamp = block.timestamp;
+        // transfer assets from rewarder to this contract
+        IERC20(asset()).safeTransferFrom(msg.sender, address(this), amount);
+
+        emit RewardsReceived(amount, newVestingAmount);
+    }
+```
