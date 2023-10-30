@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Yanchuan",
+  "risk": "2",
+  "title": "When there is no staked USDe in the staking pool, distributing rewards can cause a  DoS issue and all rewards permanently locked.",
+  "issueId": 449,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/449"
+}
