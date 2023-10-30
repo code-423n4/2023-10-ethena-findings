@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xpiken",
+  "risk": "2",
+  "title": "Different `nonce` may conflict due to unsafe casting",
+  "issueId": 372,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/372"
+}
