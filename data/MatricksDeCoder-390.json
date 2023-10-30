@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "MatricksDeCoder",
+  "risk": "2",
+  "title": "Protocol will not work well with tokens that can block transfers e.g blocklist, blacklist, pausable tokens etc ",
+  "issueId": 390,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/390"
+}
