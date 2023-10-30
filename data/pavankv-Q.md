@@ -58,3 +58,12 @@ function transferInRewards(uint256 amount) external nonReentrant onlyRole(REWARD
 
 code snippet:-
 https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDe.sol#L89C1-L99C4
+
+## 3 . Add a dust amount check in mint() function to avoid unfair mint:-
+First look into the [mint()](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol#L162) function having multi-validation mechanism but not dust amount check whether the input amount is equal to output amount. After validation it blindly call the [ _transferCollateral()](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol#L175C4-L175C25) internal fucntion to transfer the collateral amount to custodian address with specified ratio without checking the dust amount of the collateral.
+
+Recommedation :-
+Add mechanism to check whether the input amount is equal to output amount .
+
+code snippet:-
+https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol#L162C1-L187C4
