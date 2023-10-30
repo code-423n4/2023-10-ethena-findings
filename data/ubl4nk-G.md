@@ -18,7 +18,7 @@ function getDomainSeparator() public view returns (bytes32) {
     return _computeDomainSeparator();
   }
 ```
-If it is not changed, it returns previously calculated _domainSeparator, if it is changed it everytime goes to _computeDomainSeparator and recalculated the domainSeparator. 
+If it is not changed, it returns previously calculated _domainSeparator, if it is changed it everytime goes to _computeDomainSeparator and re-calculates the domainSeparator. 
 **In this way all the functions that are using `getDomainSeprator` will waste more gas than before.**
 
 Recommendation: If a hard-fork is happended, simply update these two state variables (_chainId and _domainSeparator) as you did in constructor.
