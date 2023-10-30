@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "ak1",
+  "risk": "2",
+  "title": "It is not possible for user to redeem USDe stable coin if the asset is removed from `_supportedAssets`",
+  "issueId": 504,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/504"
+}
