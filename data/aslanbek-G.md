@@ -100,7 +100,7 @@ Downcasting to uint64 is absolutely not needed. It limits the space of nonces fr
 + | redeem                                             | 6349            | 40050 | 27125  | 81122  | 16      |
 ```
 
-# [G-06] use uint256 instead of uint104
+# [G-06] Use uint256 instead of uint104 for UserCooldown.cooldownEnd
 
 [IStakedUSDeCooldown.sol#L8](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/interfaces/IStakedUSDeCooldown.sol#L8)
 
