@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "seerether",
+  "risk": "2",
+  "title": "transferInRewards() assumes amount is non-zero. A rewarder could call it with 0 which would update state but not actually transfer any rewards",
+  "issueId": 448,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/448"
+}
