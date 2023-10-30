@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "ziyou-",
+  "risk": "2",
+  "title": "Due to improper invocation of the cooldownAssets function and cooldownShares function, previously cooled assets are being re-cooled.",
+  "issueId": 394,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/394"
+}
