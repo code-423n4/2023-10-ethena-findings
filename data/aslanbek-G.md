@@ -196,3 +196,28 @@ Change uint104 to uint256:
 - | withdraw                                 | 3768            | 16911 | 18935  | 18935 | 14      |
 + | withdraw                                 | 3768            | 16573 | 18935  | 18935 | 12      |
 ```
+# [G-07] Dead code
+
+`EthenaMinting#_deduplicateOrder` either reverts or returns true. The `!_deduplicateOrder` check is not needed.
+
+[EthenaMinting.sol#L172](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L172)
+[EthenaMinting.sol#L203](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L203)
+```diff
+-   if (!_deduplicateOrder(order.benefactor, order.nonce)) revert Duplicate();
++   _deduplicateOrder(order.benefactor, order.nonce));
+```
+[IEthenaMinting.sol#L40](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/interfaces/IEthenaMinting.sol#L40)
+```diff
+-   error Duplicate();
+```
+[MintingBaseSetup.sol#L78](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/test/foundry/minting/MintingBaseSetup.sol#L78)
+```diff
+-  bytes internal Duplicate = abi.encodeWithSelector(IEthenaMinting.Duplicate.selector);
+```
+```diff
+  | contracts/EthenaMinting.sol:EthenaMinting contract |                 |       |        |        |         |
+  |----------------------------------------------------|-----------------|-------|--------|--------|---------|
+  | Deployment Cost                                    | Deployment Size |       |        |        |         |
+- | 3576457                                            | 18793           |       |        |        |         |
++ | 3555233                                            | 18687           |       |        |        |         |
+```
