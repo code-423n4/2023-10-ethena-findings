@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "deepkin",
+  "risk": "2",
+  "title": "address(0) with FULL_RESTRICTED_STAKER_ROLE role will cause DoS",
+  "issueId": 667,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/667"
+}
