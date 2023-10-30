@@ -34,8 +34,46 @@ The function reverts anyways. Removing the modifier saves 1600 gas on deployment
 -   uint256 newVestingAmount = amount + getUnvestedAmount();
 +   uint256 newVestingAmount = amount;
 ```
+# [G-04] Redundant address casting 
+```diff
+  function rescueTokens(address token, uint256 amount, address to) external onlyRole(DEFAULT_ADMIN_ROLE) {
+-   if (address(token) == asset()) revert InvalidToken();
++   if (token == asset()) revert InvalidToken();
+```
+```diff
+  | contracts/EthenaMinting.sol:EthenaMinting contract |                 |       |        |        |         |
+  |----------------------------------------------------|-----------------|-------|--------|--------|---------|
 
-# [G-04] use uint256 instead of uint104
+  | Function Name                                      | min             | avg   | median | max    | # calls |
+
+- | mint                                               | 4657            | 80639 | 123779 | 195520 | 38      |
++ | mint                                               | 4657            | 80552 | 123779 | 195520 | 38      |
+
+
+  | contracts/StakedUSDe.sol:StakedUSDe contract |                 |       |        |       |         |
+  |----------------------------------------------|-----------------|-------|--------|-------|---------|
+
+  | Function Name                                | min             | avg   | median | max   | # calls |
+
+- | deposit                                      | 16246           | 62953 | 75786  | 78986 | 38      |
++ | deposit                                      | 16246           | 62946 | 75786  | 78986 | 38      |
+
+- | mint                                         | 15450           | 45612 | 45612  | 75775 | 2       |
++ | mint                                         | 15215           | 45495 | 45495  | 75775 | 2       |
+
+- | totalAssets                                  | 1550            | 1740  | 1883   | 1883  | 14      |
++ | totalAssets                                  | 1550            | 1716  | 1716   | 1883  | 14      |
+
+
+  | contracts/StakedUSDeV2.sol:StakedUSDeV2 contract |                 |       |        |       |         |
+  |--------------------------------------------------|-----------------|-------|--------|-------|---------|
+
+  | Function Name                                    | min             | avg   | median | max   | # calls |
+
+- | cooldownShares                                   | 631             | 58837 | 69459  | 87674 | 12      |
++ | cooldownShares                                   | 631             | 58817 | 69342  | 87674 | 12      |
+```
+# [G-05] use uint256 instead of uint104
 
 [IStakedUSDeCooldown.sol#L8](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/interfaces/IStakedUSDeCooldown.sol#L8)
 
