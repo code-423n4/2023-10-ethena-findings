@@ -41,6 +41,20 @@ Protocol devs forgot to remove the function body, they removed the calling only.
 ### Mitigation
 Remove the declaration of this function in `EthenaMinting.sol`: [#L334-L336](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol#L334-L336)
 
+# Unnecessary Checking for address(0)
+
+In `EthenaMinting.sol`, there are unnecessary checks for zero addresses in the following functions:
+- **EthenaMinting::verifyRoute**: [#L364](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol#L364)
+- **EthenaMinting::transferToCustody**: [#L248](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol#L248)
+
+These two functions check if the `_custodianAddresses` contains the following assets or not. And when adding and new address to `_custodianAddresses` checking for address(0) is done, 
+so we are sure that the `_custodianAddresses` will not have an address(0), so its unnecessary to check for address(0) twice.
+
+This will make code syntax look better, in addition to saving gas when executing these two functions.
+
+### Mitigation
+Remove checking for address(0) in the two functions we mentioned above.
+
 # Refactor the reused code in a separate function
 
 In `StakedUSDe.sol`, these two functions `cooldownAssets()` and `cooldownShares()` have a common syntax for making a withdrawal request. It is better to refactor the code syntax to improve functions readability and improve code syntax.
@@ -93,6 +107,15 @@ function cooldownShares(uint256 shares, address owner) external ensureCooldownOn
     return shares;
 }
 ```
+# Forgetting using `constant` keyword
+It  seems developers forgot to put constant keyword in `MAX_COOLDOWN_DURATION` variable in the `StakedUSDeV2.sol` [#L22](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDeV2.sol#L22), as it's in UPPERCASE syntax, and its value is unchangeable.
+
+### Mitigation
+Add constant keyword before the variable name in `StakedUSDeV2.sol`.
+```diff
+-    uint24 public MAX_COOLDOWN_DURATION = 90 days;
++    uint24 public constant MAX_COOLDOWN_DURATION = 90 days;
+```
 
 # Incorrect Commenting Syntax
 
@@ -104,8 +127,4 @@ You should follow the commenting syntax pattern to improve readability.
 
 ### Mitigation
 Add an additional slash to follow the commenting sytax.
-
-
-
-
 
