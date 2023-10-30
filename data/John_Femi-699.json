@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "John_Femi",
+  "risk": "2",
+  "title": "There is no check for collateral token in mint matches same in withdraw",
+  "issueId": 699,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/699"
+}
