@@ -26,7 +26,7 @@ Total 3 Non Critical Issues
 ## [L-01]  Check Low Level Calls for address 0
 
 ### `beneficiary` can be address 0 so must be checked for address 0 before transferring ether to it.
-
+If 0 passed as `beneficiary`  these ethers will be lost because no `address(0)` check is implemented before this  ether(or blockchain native token on other chain) transferring.
 _1 Instance in 1 File_
 
 ```solidity
