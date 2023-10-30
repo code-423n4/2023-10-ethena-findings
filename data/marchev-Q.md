@@ -23,3 +23,34 @@ The issue here is that because there is only one cooldown entry allowed per acco
 
 **Recommendation:**
 To prevent this problem and allow rightful fund unstaking, implement a mechanism that assigns a separate cooldown period to each withdrawal.
+
+# [QA-3] `vestingAmount` in `transferInRewards()` will always be equal to `amount` being transferred in
+
+Currently, the implementation of `transferInRewards()` calculates the new `vestingAmount` like this:
+
+```sol
+if (getUnvestedAmount() > 0) revert StillVesting();
+uint256 newVestingAmount = amount + getUnvestedAmount();
+
+vestingAmount = newVestingAmount;
+```
+
+But based on the `if` statement just before the assignment, `getUnvestedAmount()` will always be equal to `0`, thus essentially `uint256 newVestingAmount = amount`. This is superfluous and costs unnecessary gas upon each invocation of `transferInRewards()`. It also makes the code unnecessarily complex and leads to poor readability.
+
+**Recommendation:**
+Simplify the implementation by assigning `vestingAmount` to `amount` directly:
+```diff
+--- a/contracts/StakedUSDe.sol
++++ b/contracts/StakedUSDe.sol
+@@ -88,9 +88,8 @@ contract StakedUSDe is SingleAdminAccessControl, ReentrancyGuard, ERC20Permit, E
+    */
+   function transferInRewards(uint256 amount) external nonReentrant onlyRole(REWARDER_ROLE) notZero(amount) {
+     if (getUnvestedAmount() > 0) revert StillVesting();
+-    uint256 newVestingAmount = amount + getUnvestedAmount();
+
+-    vestingAmount = newVestingAmount;
++    vestingAmount = amount;
+     lastDistributionTimestamp = block.timestamp;
+     // transfer assets from rewarder to this contract
+     IERC20(asset()).safeTransferFrom(msg.sender, address(this), amount);
+```
