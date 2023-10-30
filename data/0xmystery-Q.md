@@ -102,3 +102,37 @@ https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDeV2.so
 -  /// @param owner address to redeem and start cooldown, owner must allowed caller to perform this action
 +  /// @param owner address to redeem and start cooldown, owner must allow caller to perform this action
 ```
+## Functions should have fully intended logic
+The function below is meant to be used only for minting. Hence, redeeming has got nothing to do with this view function. Consider refactoring the first if block so [`mint()`](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol#L171) could revert earlier if need be:
+
+https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.sol#L351-L374
+
+```diff
+  function verifyRoute(Route calldata route, OrderType orderType) public view override returns (bool) {
+    // routes only used to mint
+-    if (orderType == OrderType.REDEEM) {
+-      return true;
+-    }
++    if (orderType =! OrderType.MINT) {
++      return false;
++    }
+    uint256 totalRatio = 0;
+    if (route.addresses.length != route.ratios.length) {
+      return false;
+    }
+    if (route.addresses.length == 0) {
+      return false;
+    }
+    for (uint256 i = 0; i < route.addresses.length; ++i) {
+      if (!_custodianAddresses.contains(route.addresses[i]) || route.addresses[i] == address(0) || route.ratios[i] == 0)
+      {
+        return false;
+      }
+      totalRatio += route.ratios[i];
+    }
+    if (totalRatio != 10_000) {
+      return false;
+    }
+    return true;
+  }
+```
