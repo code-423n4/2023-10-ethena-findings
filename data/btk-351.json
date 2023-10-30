@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "btk",
+  "risk": "2",
+  "title": "Hardcoded short vesting period will cause rewards instability when cooldown is disabled",
+  "issueId": 351,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/351"
+}
