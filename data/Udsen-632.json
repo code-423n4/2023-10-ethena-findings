@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "THE RETURN VALUE OF THE `EthenaMinting.verifyOrder` FUNCTION IS NOT CHECKED FOR SUCCESS INSIDE THE `EthenaMinting.mint` FUNCTINO EXECUTION",
+  "issueId": 632,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/632"
+}
