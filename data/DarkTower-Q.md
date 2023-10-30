@@ -4,7 +4,7 @@
 |-|:-|:-:|
 L-1 | Wrong error reverted in the `verifyOrder` function | 1
 L-2 | Potential for USDe to end up in custodian wallet | 1
-L-3 | Use `safeTransfer` instead of `transfer` in `USDeSillo::withdraw` | 1 |
+L-3 | Use `safeTransfer` instead of `transfer` in `USDeSilo::withdraw` | 1 |
 
 Total: 3 contexts over 3 issues
 
@@ -13,7 +13,7 @@ Total: 3 contexts over 3 issues
 |-|:-|:-:|
 | NC-1| Unnecessary addition of `getUnvestedAmount()` in the `transferInRewards` function | 1 |
 
-Total: 1 contexts over 1 issues
+Total: 1 context over 1 issue
 
 
 ## [L-1] Wrong revert error in the `verifyOrder` function
