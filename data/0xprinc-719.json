@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xprinc",
+  "risk": "2",
+  "title": "Tokens having `Fee-On-Transfer` are not considered which will make the protocol in retaining less value than expected.",
+  "issueId": 719,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/719"
+}
