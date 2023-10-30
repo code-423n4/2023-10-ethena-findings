@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "KIntern_NA",
+  "risk": "2",
+  "title": "FULL_RESTRICTED_STAKER_ROLE can still withdraw from `StakedUSDe` contract by approving to another address and using that address to call withdraw",
+  "issueId": 438,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/438"
+}
