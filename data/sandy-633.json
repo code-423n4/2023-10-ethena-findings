@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "sandy",
+  "risk": "3",
+  "title": "The ``_transferToBeneficiary()`` incorrectly assumes Native ETH amount and ERC20 Token amount as 1:1.",
+  "issueId": 633,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/633"
+}
