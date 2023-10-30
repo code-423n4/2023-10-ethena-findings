@@ -26,7 +26,16 @@ The function reverts anyways. Removing the modifier saves 1600 gas on deployment
 - | mint                                               | 4657            | 80639 | 123779 | 195520 | 38      |
 + | mint                                               | 4657            | 78735 | 123632 | 195373 | 39      |
 ```
-# [G-03] use uint256 instead of uint104
+# [G-03] Remove adding zero
+[StakedUSDe.sol#L90-L91](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/StakedUSDe.sol#L90-L91)
+
+```diff
+    if (getUnvestedAmount() > 0) revert StillVesting();
+-   uint256 newVestingAmount = amount + getUnvestedAmount();
++   uint256 newVestingAmount = amount;
+```
+
+# [G-04] use uint256 instead of uint104
 
 [IStakedUSDeCooldown.sol#L8](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/interfaces/IStakedUSDeCooldown.sol#L8)
 
