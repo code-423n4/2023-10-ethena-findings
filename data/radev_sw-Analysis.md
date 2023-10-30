@@ -10,22 +10,26 @@
 | 4   | Systemic Risks                                                                                                   |
 | 5   | Attack Vectors Discussed During the Audit                                                                        |
 
-*Pdf link -> https://www.docdroid.net/pwoydhp/analysis-report-pdf*
+_Pdf link -> https://www.docdroid.net/pwoydhp/analysis-report-pdf_
 
 ---
 
 # 1. Architecture Overview (Protocol Explanation, Codebase Explanation, Examples Scenarios of Intended Protocol Flow)
 
 ## 1.1. Protocol Explanation
+
 - ###### Overview:
+
   Ethena is developing a DeFi ecosystem with a primary goal of offering a permissionless stablecoin, USDe, that allows users to earn yield within the system. This process is a contrast to traditional stablecoins like USDC, where the central authority (e.g., Circle) benefits from the yield. In Ethena's ecosystem, users can stake their USDe to earn stUSDe, which appreciates over time as the protocol generates yield.
 
 - ###### Smart Contract Infrastructure:
+
   - `USDe.sol`: The contract for the USDe stablecoin, limited in functionality with controls for minting privileges.
   - `EthenaMinting.sol`: This contract mints and redeems USDe in a single, atomic, trustless transaction. Central to user interactions, handling minting and redemption of USDe. It employs EIP712 signatures for transactions, routing collateral through predefined safe channels, and includes security measures against potential compromises by limiting minting and providing emergency roles (GATEKEEPERS) to intervene in suspicious activities.
   - `StakedUSDeV2.sol`: Allows USDe holders to stake their tokens for stUSDe, earning yield from the protocol's profits. It incorporates mechanisms to prevent exploitation of yield payouts and has a cooldown period for unstaking. For legal compliance, it can restrict certain users (based on jurisdiction or law enforcement directives) from staking or freeze their assets, with the provision of fund recovery in extreme cases.
 
 - ###### Roles in Ethena Ecosystem:
+
   - `USDe` minter - can mint any amount of USDe tokens to any address. Expected to be the EthenaMinting contract.
   - `USDe` owner - can set token minter and transfer ownership to another address
   - `USDe` token holder - can not just transfer tokens but burn them and sign permits for others to spend their balance
@@ -55,51 +59,79 @@
 #### All possible Actions and Flows in Ethena Protocol:
 
 ##### 1. Minting USDe:
+
 Users provide stETH as collateral to mint USDe. The system gives an RFQ (Request for Quote) detailing how much USDe they can create. Upon agreement, the user signs a transaction, and Ethena mints USDe against the stETH, which is then employed in various yield-generating activities, primarily shorting ETH perpetual futures to maintain a delta-neutral position.
 
 ###### Additional Explanations Related to the `Minting`:
+
 - So, `USDe` will be equivalent to using DAI, USDC, USDT (`USDe` contract is just the ERC20 token for the stablecoin and this token will be the token used in `StakedUSDeV2.sol` staking contract) where it `doesn't have any yield` and `only the holders of stUSDe` will earn the generated yield.
 - The `EthenaMinting.sol` contract is the place where `minting` is done.
 
 ###
 
 ##### 2. Yield Generating:
+
 Ethena generates yield by taking advantage of the differences in staking returns (3-4% for stETH) and shorting ETH perpetuals (6-8%). Profits are funneled into an insurance fund and later distributed to stakers, enhancing the value of stUSDe relative to USDe.
 
 ###
 
-##### 3. Maintaining Delta Neutrality: 
+##### 3. Maintaining Delta Neutrality:
+
 Ethena employs a strategy involving stETH and short positions in ETH perpetuals, ensuring the value stability of users' holdings against market volatility.
 
-###### *Example № 1:*
-  1. Initial Setup:
+###### _Example № 1:_
+
+1. Initial Setup:
+
+
     - The user initiates the process by sending 10 stETH to Ethena. The stETH is a token representing staked Ethereum in the Ethereum 2.0 network, allowing holders to earn rewards while keeping liquidity. At the time of the transaction, Ethereum's price is $2,000; thus, 10 stETH equals $20,000.
     - Ethena uses these 10 stETH to mint 20,000 USDe stablecoins for the user, reflecting the stETH's dollar value.
     - Simultaneously, Ethena opens a short position on Ethereum perpetual futures (ETH perps) equivalent to 10 ETH. Given the current Ethereum price of $2,000, this also represents a $20,000 position. This short position means that Ethena is betting on the Ethereum price going down.
-  2. Market Movement and Its Impact:
+
+2. Market Movement and Its Impact:
+
+
     - Now, the market faces significant volatility, and the price of Ethereum drops by 90%. As a result, the value of the user's 10 stETH decreases to $2,000 (reflecting the 90% drop from the original $20,000 value).
     - However, because Ethena shorted 10 ETH worth of perps, the decrease in Ethereum's price is advantageous for this position. The short ETH perps position now has an unrealized profit of $18,000. This profit occurs because Ethena 'borrowed' the ETH at a higher price to open the position and can now 'buy' it back at a much lower price, pocketing the difference.
-  3. Redemption Process:
+
+3. Redemption Process:
+
+
     - The user decides to redeem their 20,000 USDe. For Ethena to honor this request, they need to provide the user with the equivalent value in stETH that the USDe represents.
     - Ethena closes the short position on the ETH perps, which means they 'buy' back the ETH at the current market price, realizing the $18,000 profit due to the price difference from when they opened the short position.
     - With the $18,000, Ethena purchases 90 stETH at the current market price ($200 per stETH, as the price has dropped by 90%).
     - Ethena then returns the original 10 stETH along with the 90 stETH purchased from the profits of the short position. So, the user receives 100 stETH, which, at the current market price, is worth $20,000.
 
-###### *Example № 2:*
-  1. Initial Condition:
+###### _Example № 2:_
+
+1. Initial Condition:
+
+
     - The price of ETH is $2,000.
     - The user sends in 10 stETH (equivalent to 10 ETH) to Ethena to mint 20,000 USDe (since 10 ETH at $2,000 per ETH is worth $20,000).
     - Ethena takes these 10 stETH and opens a short position on 10 ETH's worth of perpetual futures (perps) to hedge against the price movement of ETH.
-  2. Market Movement:
+
+2. Market Movement:
+
+
     - The market goes up by 50%. Therefore, the price of ETH (and stETH, as it’s pegged to the ETH value) increases to $3,000.
-  3. Position Analysis:
+
+3. Position Analysis:
+
+
     - The user's 10 stETH is now worth $30,000 due to the market increase.
     - However, Ethena's short position is now at a notional loss because it was betting on the price of ETH going down, not up. The loss on the short position is $10,000 (the increase in value per ETH is $1,000, and Ethena shorted 10 ETH).
-  4. Redemption Process:
+
+4. Redemption Process:
+
+
     - If the user decides to redeem their USDe, they will present their 20,000 USDe.
     - Considering the market movement, the short position's loss needs to be covered. Ethena has to close the short position and realize the loss of $10,000.
     - After covering the $10,000 loss, there's $20,000 worth of stETH left (approximately 6.67 stETH at the new rate of $3,000 per stETH) to return to the user.
-  5. End Result:
+
+5. End Result:
+
+
     - The user initially had assets worth $20,000 (10 stETH). If they hadn't engaged with Ethena and simply held onto their 10 stETH, their assets would now be worth $30,000 due to the positive market movement.
     - By choosing to use Ethena's hedging mechanism, they've forfeited potential gains to safeguard against potential losses. They receive approximately 6.67 stETH (worth $20,000) back after the redemption process, missing out on the additional $10,000 value increase.
     - Essentially, the user's assets remained stable in USDe value, but they did not benefit from ETH's bullish market. Their asset value didn’t decrease, but they also lost potential profit
@@ -114,23 +146,27 @@ Ethena employs a strategy involving stETH and short positions in ETH perpetuals,
 
 1. **`USDe.sol`**:
 
-    ![usde-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/usde-contract.png?raw=true)
+   ![usde-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/usde-contract.png?raw=true)
 
    - Code Organization:
+
      - The contract is well-organized and follows the best practices for code layout and structure.
      - It uses OpenZeppelin contracts, which are widely recognized and audited.
      - The constructor initializes the contract and sets the owner/admin.
      - It provides functions to set the minter and mint USDe tokens.
 
    - Modifiers:
+
      - The contract uses the `Ownable2Step` modifier, which enforces two-step ownership transfer.
      - The `onlyRole` modifier is used to restrict certain functions to specific roles, enhancing security.
 
    - Minting:
+
      - The contract allows only the minter to mint new tokens, which is a good security measure.
      - It checks if the provided minter is valid.
 
    - Gas Efficiency:
+
      - The contract uses the SafeERC20 library for safe token transfers, ensuring protection against reentrancy attacks.
      - Gas-efficient practices are followed throughout the contract.
 
@@ -140,34 +176,42 @@ Ethena employs a strategy involving stETH and short positions in ETH perpetuals,
 
 2. **`EthenaMinting.sol`**:
 
-    ![ethena-minting-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/ethena-minting-contract.png?raw=true)
+   ![ethena-minting-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/ethena-minting-contract.png?raw=true)
 
    - Code Organization:
+
      - It imports external libraries and contracts, including OpenZeppelin contracts.
      - The constructor initializes contract parameters and roles.
      - It contains functions for minting and redeeming USDe tokens.
 
    - Security Measures:
+
      - The contract enforces access control using role-based access control (RBAC) with different roles for minters, redeemers, and gatekeepers.
      - Gas limits for minting and redeeming are enforced to prevent abuse.
 
    - Signature Verification:
+
      - It verifies the signature of orders, ensuring that the orders are signed by authorized parties.
      - It uses EIP-712 for signature verification.
 
    - Gas Efficiency:
+
      - Gas-efficient practices are followed, and SafeERC20 is used for token transfers.
 
    - Domain Separator:
+
      - The contract computes the domain separator for EIP-712, enhancing security.
 
    - Deduplication:
+
      - The contract implements deduplication of taker orders to prevent replay attacks.
 
    - Supported Assets:
+
      - The contract maintains a list of supported assets.
 
    - Custodian Addresses:
+
      - It keeps track of custodian addresses and allows transfers to custodian wallets.
 
    - Overall, `EthenaMinting.sol` is well-structured, secure, and follows best practices for code organization and security.
@@ -176,7 +220,7 @@ Ethena employs a strategy involving stETH and short positions in ETH perpetuals,
 
 3. **`StakedUSDe.sol:`**
 
-  The contract inherits **Implementation of the ERC4626 "Tokenized Vault Standard" from OZ**
+The contract inherits **Implementation of the ERC4626 "Tokenized Vault Standard" from OZ**
 
     ![erc4626-oz-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/erc4626-oz-contract.png?raw=true)
 
@@ -197,7 +241,7 @@ Ethena employs a strategy involving stETH and short positions in ETH perpetuals,
 
 4.  **`StakedUSDeV2.sol:`**
 
-  ![staked-usde-v2-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/staked-usde-v2-contract.png?raw=true)
+![staked-usde-v2-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/staked-usde-v2-contract.png?raw=true)
 
 - Code Organization:
   - The contract extends `StakedUSDe` and inherits its code organization structure.
@@ -212,21 +256,23 @@ Ethena employs a strategy involving stETH and short positions in ETH perpetuals,
 
 5. **`USDeSilo.sol:`**
 
-  ![usde-silo-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/usde-silo-contract.png?raw=true)
+![usde-silo-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/usde-silo-contract.png?raw=true)
 
-  - The contract is primary goal of `USDeSilo.sol` is to to `hold the funds` for the `cooldown period` whn user initiate `unstaking`. 
+- The contract is primary goal of `USDeSilo.sol` is to to `hold the funds` for the `cooldown period` whn user initiate `unstaking`.
 
-  **General Observations:**
-   - Role-based access control is implemented for various functions, enhancing security.
-   - Gas-efficient practices, such as using SafeERC20, are followed throughout the code.
-   - The codebase of protocol includes comprehensive comments and region divisions for clarity.
-   - Note that, The use of EIP-712 for signature verification adds an extra layer of security.
+**General Observations:**
+
+- Role-based access control is implemented for various functions, enhancing security.
+- Gas-efficient practices, such as using SafeERC20, are followed throughout the code.
+- The codebase of protocol includes comprehensive comments and region divisions for clarity.
+- Note that, The use of EIP-712 for signature verification adds an extra layer of security.
 
 6. **`SingleAdminAccessControl.sol:`**
-    
-  ![single-admin-access-control-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/single-admin-access-control-contract.png?raw=true)
 
-  - EthenaMinting uses SingleAdminAccessControl rather than the standard AccessControl.
+![single-admin-access-control-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/single-admin-access-control-contract.png?raw=true)
+
+- EthenaMinting uses SingleAdminAccessControl rather than the standard AccessControl.
+
 ###
 
 In summary, the Ethena Protocol's codebase appears to be of high quality, with a strong focus on security and code organization.
@@ -238,6 +284,7 @@ In summary, the Ethena Protocol's codebase appears to be of high quality, with a
 ##
 
 # 3. Centralization Risks
+
 Actually, the `Ethena` Protocol contains many roles, each with quite a few abilities. This is necessary for the Protocol's logic and purpose.
 
 The protocol assigns important roles like "MINTER," "REWARDER," and "ADMIN" to specific entities, potentially exposing the system to undue influence or risks if these roles are compromised.
@@ -247,11 +294,13 @@ So, these roles introduce several **centralization risks**. The most significant
 However, `Ethena` **addresses this problem** by enforcing on-chain **mint and redeem limitations of 100k USDe** per block."
 
 From the documentation:
+
 > Our solution is to enforce an on chain mint and redeem limitation of 100k USDe per block. In addition, we have `GATEKEEPER` roles with the ability to disable mint/redeems and remove `MINTERS`,`REDEEMERS`. `GATEKEEPERS` acts as a safety layer in case of compromised `MINTER`/`REDEEMER`. They will be run in seperate AWS accounts not tied to our organisation, constantly checking each transaction on chain and disable mint/redeems on detecting transactions at prices not in line with the market. In case compromised `MINTERS` or `REDEEMERS` after this security implementation, a hacker can at most mint 100k USDe for no collateral, and redeem all the collateral within the contract (we will hold ~$200k max), for a max loss of $300k in a single block, before `GATEKEEPER` disable mint and redeem. The $300k loss will not materialy affect our operations.
 
 ###
 
 In summary, `Ethena` actually introduces several centralization risks due to the presence of many different roles in the Protocol. **However, at the same time, the team has done its best to enforce measures that reduce the largest potential attack scenario to a maximum loss of $300k, which will not materially affect the `Ethena` operations/ecosystem.**
+
 ###
 
 ---
@@ -259,15 +308,16 @@ In summary, `Ethena` actually introduces several centralization risks due to the
 ##
 
 # 4. Systemic Risks
+
 Here’s an analysis of potential systemic
 
 1. Smart Contract Vulnerability Risk:
-Smart contracts can contain `vulnerabilities` that can be exploited by attackers. If a smart contract has `critical security flaws`, such as logic problems, this could lead to asset loss or `system manipulation`. I strongly recommend that, once the protocol is audited, necessary actions be taken to `mitigate any issues` identified by `C4 Wardens`
+   Smart contracts can contain `vulnerabilities` that can be exploited by attackers. If a smart contract has `critical security flaws`, such as logic problems, this could lead to asset loss or `system manipulation`. I strongly recommend that, once the protocol is audited, necessary actions be taken to `mitigate any issues` identified by `C4 Wardens`
 
 ###
 
 2. Third-Party Dependency Risk:
-Contracts rely on external data sources, such as `@openzeppelin/contracts-upgradeable`, and there is a risk that if any `issues` are found with these `dependencies` in your contracts, the `Ethena` protocol could also be affected.
+   Contracts rely on external data sources, such as `@openzeppelin/contracts-upgradeable`, and there is a risk that if any `issues` are found with these `dependencies` in your contracts, the `Ethena` protocol could also be affected.
 
 I observed that `old versions` of `OpenZeppelin` are used in the project, and these should be updated to the latest version:
 
@@ -286,12 +336,13 @@ The latest version is `4.9.3` (as of July 28, 2023), while the project uses vers
 ##
 
 # 5. Attack Vectors Discussed During the Audit
+
 1. Issues related to Roles (Centralization Risks). Problems with roles changing.
 2. Breaking of Main Protocol Invariants
-    - EthenaMinting.sol - User's signed EIP712 order, if executed, must always execute as signed. ie for mint orders, USDe is minted to user and collateral asset is removed from user based on the signed values.
-    - Max mint per block should never be exceeded.
-    - USDe.sol - Only the defined minter address can have the ability to mint USDe.
-3. DoS for important protocol functions/flows such as `EtehnaMinting.sol#mint()` (Minting Flow), `EtehnaMinting.sol#redeem()` (Redemption Flow), `StakedUSDe#deposit()/StakedUSDe#_deposit()` (Depositing Flow), `StakedUSDeV2#unstake()` (Unstaking Flow). 
+   - EthenaMinting.sol - User's signed EIP712 order, if executed, must always execute as signed. ie for mint orders, USDe is minted to user and collateral asset is removed from user based on the signed values.
+   - Max mint per block should never be exceeded.
+   - USDe.sol - Only the defined minter address can have the ability to mint USDe.
+3. DoS for important protocol functions/flows such as `EtehnaMinting.sol#mint()` (Minting Flow), `EtehnaMinting.sol#redeem()` (Redemption Flow), `StakedUSDe#deposit()/StakedUSDe#_deposit()` (Depositing Flow), `StakedUSDeV2#unstake()` (Unstaking Flow).
 4. Token transfer fails.
 5. Minting more than 100k USDe per block.
 6. Users cannot unstake/withdraw/redeem.
@@ -303,7 +354,6 @@ The latest version is `4.9.3` (as of July 28, 2023), while the project uses vers
 ---
 
 ##
-
 
 
 ### Time spent:
