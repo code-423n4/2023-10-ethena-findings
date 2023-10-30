@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "0xrugpull_detector",
+  "risk": "3",
+  "title": "A user can mint `maxMintPerBlock` amounts of USDe with 1 wei of collateral by signing malicious order.",
+  "issueId": 363,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/363"
+}
