@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Avci",
+  "risk": "3",
+  "title": "bad Actor can block the operation of mint by creating duplicate order by frunt runing original order",
+  "issueId": 682,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/682"
+}
