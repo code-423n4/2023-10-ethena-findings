@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Avci",
+  "risk": "2",
+  "title": "hardcoded route ratio might hcause verify route return false continously instead use >= ",
+  "issueId": 710,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/710"
+}
