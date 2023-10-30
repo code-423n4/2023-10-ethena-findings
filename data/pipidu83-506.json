@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "pipidu83",
+  "risk": "3",
+  "title": "Calling ```cooldownShares``` or ```cooldownAssets``` more than once will effectively reset the cooldown period for all the claimed shares/assets.",
+  "issueId": 506,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/506"
+}
