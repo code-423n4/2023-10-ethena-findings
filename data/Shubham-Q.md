@@ -2,8 +2,7 @@
 
 | |Issue|Instances|
 |-|:-|:-:|
-| [L-01](#L-01) | Malicious actor can evade the FULL_RESTRICTED_STAKER_ROLE role | 1 |
-| [L-02](#L-02) | Users can transfer in small amounts before VESTING_PERIOD duration has passed | 1 |
+| [L-01](#L-01) | Users can transfer in small amounts before VESTING_PERIOD duration has passed | 1 |
 
 ## Non-Critical Issues
 
@@ -13,16 +12,7 @@
 | [NC-02](#NC-02) | Unnecessary computation in `transferInRewards()` | 1 |
 
 
-## [L-01] Malicious actor can evade the FULL_RESTRICTED_STAKER_ROLE role
-
-The protocol has implemented the FULL_RESTRICTED_STAKER_ROLE role so that the StakedUSDe owner has authority over blacklisting addresses and then manipulating their balances. This mechanism is flawed and an attacker can bypass it - let's look at an example:
-
-- A user does a malicious action or is understood to be a bad actor. The StakedUSDe owner decides to blacklist his address
-- The StakedUSDe owner sends a transaction with a call to addToBlacklist for the address of the malicious user
-- The user is monitoring Ethereum's mempool and front-runs this transaction, sending all of his stUSDe balance to another address he controls
-- Now his old address is blacklisted as he has the FULL_RESTRICTED_STAKER_ROLE role, but all of his tokens are in his new address and can be used as normal
-
-## [L-02] Users can transfer in small amounts before VESTING_PERIOD duration has passed
+## [L-01] Users can transfer in small amounts before VESTING_PERIOD duration has passed
 
 `getUnvestedAmount()` returns 0 when timeSinceLastDistribution >= VESTING_PERIOD that is greater or equal to 8 hours. 
 But even if the `timeSinceLastDistribution` is close to 8 hours & vesting amount is high, the function would still return 0 or if the amount to send is small & the not much time has passed since the last transfer. 
