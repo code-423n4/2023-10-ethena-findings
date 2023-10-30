@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Avci",
+  "risk": "2",
+  "title": "in the verify route the order type should not be ordertype.REDEEM and function should return false but returns true.",
+  "issueId": 692,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/692"
+}
