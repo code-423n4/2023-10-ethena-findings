@@ -2,7 +2,7 @@
 
 [USDe.sol#L33-L35](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/USDe.sol#L33-L35) 
 
-The function reverts anyways. Removing the modifier saves 1600 gas on deployment.
+The function is supposed to revert. Removing the modifier saves 1600 gas on deployment.
 
 # [G-02] Use hardcoded value instead of retrieving it from calldata 
 [EthenaMinting.sol#L171](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L171)
