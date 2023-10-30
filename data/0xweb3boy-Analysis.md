@@ -11,7 +11,7 @@ Audit contest: `Ethena Labs`
   - 2.4 Exploitation and Proofs of Concept
   - 2.5 Report Issues
 - 3. Architecture overview
-  - 3.1 Overview of Open Dollar as a Lending Protocol 
+  - 3.1 Overview of Ethena Labs 
   - 3.2  Key Contracts Introduced
   - 3.3 Scope of the Audit
 - 4. Implementation Notes
@@ -194,6 +194,8 @@ The insights presented are not only beneficial for the project team but also ext
 
 ### Time spent:
 18 hours
+
+
 
 
 ### Time spent:
