@@ -103,4 +103,52 @@ Recommendations:
 
 ### Low 05 - No on-chain check to ensure mint, redeem will always submit a benefactor's nonce in an incrementing manner
 
-In EthenaMinting.sol - `mint()` and `redeem()`, only `MINTER_ROLE` and `REDEEMER_ROLE` can submit `mint()` and `redeem()` order. Trust has to be placed on `MINTER_ROLE` and `REDEEMER_ROLE` 
+In EthenaMinting.sol - `mint()` and `redeem()`, only `MINTER_ROLE` and `REDEEMER_ROLE` can submit `mint()` and `redeem()` order. Trust has to be placed on `MINTER_ROLE` and `REDEEMER_ROLE` to always submit the user order nonce correctly. However, if `MINTER_ROLE` and `REDEEMER_ROLE` submit an incorrect nonce (e.g. skipping or jumping numbers) there is no way on-chain process will detect it. 
+
+This could happen either by mistake or when `MINTER_ROLE` or `REDEEMER_ROLE` key is compromised. Malicious `MINTER_ROLE` or `REDEEMER_ROLE` could submit random future nonces which might cause a user unable to `mint()` or `redeem()` in the future due to nonce collision.
+
+```solidity
+// contracts/EthenaMinting.sol
+  function mint(Order calldata order, Route calldata route, Signature calldata signature)
+    external
+    override
+    nonReentrant
+    onlyRole(MINTER_ROLE)
+    belowMaxMintPerBlock(order.usde_amount)
+  {
+    if (order.order_type != OrderType.MINT) revert InvalidOrder();
+    verifyOrder(order, signature);
+    if (!verifyRoute(route, order.order_type)) revert InvalidRoute();
+|>  if (!_deduplicateOrder(order.benefactor, order.nonce)) revert Duplicate();
+...
+```
+(https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L172)
+```solidity
+// contracts/EthenaMinting.sol
+  function _deduplicateOrder(address sender, uint256 nonce) private returns (bool) {
+|>  (bool valid, uint256 invalidatorSlot, uint256 invalidator, uint256 invalidatorBit) = verifyNonce(sender, nonce);
+    mapping(uint256 => uint256) storage invalidatorStorage = _orderBitmaps[sender];
+    invalidatorStorage[invalidatorSlot] = invalidator | invalidatorBit;
+    return valid;
+  }
+```
+(https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L391-L395)
+```solidity
+// contracts/EthenaMinting.sol
+  function verifyNonce(address sender, uint256 nonce) public view override returns (bool, uint256, uint256, uint256) {
+...
+    uint256 invalidatorSlot = uint64(nonce) >> 8;
+    uint256 invalidatorBit = 1 << uint8(nonce);
+    mapping(uint256 => uint256) storage invalidatorStorage = _orderBitmaps[sender];
+    uint256 invalidator = invalidatorStorage[invalidatorSlot];
+|>  if (invalidator & invalidatorBit != 0) revert InvalidNonce();
+...
+```
+(https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L383)
+
+As seen above, in `mint()` or `redeem()`, `verifyNonce()` will run every time to make sure the `nonce` submitted by `MINTER_ROLE` or `REDEEMER_ROLE` is not clashing with an existing nonce. However, it didn't check whether the `nonce` is incrementing by 1 from the previous `nonce`. The lack of this on-chain checks, allows room for jumping or skipping nonce to go through whenever the situation allows, which will cause future `mint()` or `redeem()` orders to revert causing DOS of a certain user's `mint()` or `redeem()` and user collaterals can be locked permanently.
+
+Recommendations:
+Add additional checks in `verifyNonce()` to ensure a user's nonce always increments by 1.
+
+
