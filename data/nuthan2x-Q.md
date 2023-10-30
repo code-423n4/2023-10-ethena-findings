@@ -2,12 +2,12 @@
 | |Issue|Instances|
 |-|:-|:-:|
 | [LOW-1](#LOW-1) | ownership transfer  in constructor is not implemented on Ownable2Step way| 1 |
-| [LOW-2](#LOW-2) | transaction fails if a variant of `token` & `to`| 1 |
+| [LOW-2](#LOW-2) | transaction fails on one of the variant of `token` & `to`| 1 |
+| [LOW-3](#LOW-3) | FULL_RESTRICTED_STAKER_ROLE can be frontran | 1 |
 
 ### <a name="LOW-1"></a>[LOW-1] `USDe::constructor` ownership transfer for first time in constructor is not implemented on Ownable2Step method
 
-## Impact
-- Initial ownership transfer should be done in Ownable2Step methof, but directly transferred in [constructor](https://github.com/code-423n4/2023-10-ethena/blob/d361ced0f57005a1b80c7d01673e17582847aaed/protocols/USDe/contracts/USDe.sol#L20)
+- Initial ownership transfer should be done in Ownable2Step method, but directly transferred in [constructor](https://github.com/code-423n4/2023-10-ethena/blob/d361ced0f57005a1b80c7d01673e17582847aaed/protocols/USDe/contracts/USDe.sol#L20)
 - First call `transferOwnership(admin)` then from admin key, call `acceptOwnership()`
 - Severity : Low
 - Likelihood : Medium
@@ -17,6 +17,7 @@
 -  _transferOwnership(admin);
 +  transferOwnership(admin);
 ```
+
 ### <a name="LOW-2"></a>[LOW-2] `StakedUSDe.rescueTokens()` transaction fails if `token` == `stUSDE` && `to` == address with `FULL_RESTRICTED_STAKER_ROLE`
 - Severity : low
 - Likelihood : low
@@ -39,3 +40,10 @@
   }
 
 ```
+
+### <a name="LOW-3"></a>[LOW-3] `StakedUSDe._beforeTokenTransfer` can be frontran by a service.
+- Scenario:
+   - whenever a `BLACKLIST_MANAGER_ROLE` makes a tx, it can be searched via mempool and someone with approval of the (to be blacklisted)'s address will transfer the funds to the delegate already set.
+   - Low likelyhood, should be soled when tx'ns of blacklist manager are sent to flashbots builder.
+- Severity : low
+- Likelihood : Med
