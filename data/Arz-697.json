@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Arz",
+  "risk": "2",
+  "title": "SOFT_RESTRICTED_STAKER_ROLE is able to withdraw stUSDe for USDe even if it shouldnt",
+  "issueId": 697,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/697"
+}
