@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "lanrebayode77",
+  "risk": "2",
+  "title": "A previously approved address can DOS the unstaking of a staker/user by calling cooldownAssests with dust amount.",
+  "issueId": 376,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/376"
+}
