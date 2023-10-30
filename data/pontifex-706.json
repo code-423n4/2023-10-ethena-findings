@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "pontifex",
+  "risk": "2",
+  "title": "Staking functionality temporary blocking due to lack of address zero check",
+  "issueId": 706,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/706"
+}
