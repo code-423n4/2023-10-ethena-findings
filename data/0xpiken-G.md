@@ -10,7 +10,8 @@
     // transfer assets from rewarder to this contract
     IERC20(asset()).safeTransferFrom(msg.sender, address(this), amount);
 
-    emit RewardsReceived(amount, amount);
+-   emit RewardsReceived(amount, newVestingAmount);
++   emit RewardsReceived(amount, amount);
   }
 ```
 ## [02] Define [`MAX_COOLDOWN_DURATION`](https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDeV2.sol#L22) as constant:
