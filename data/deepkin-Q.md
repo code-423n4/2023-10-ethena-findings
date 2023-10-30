@@ -61,24 +61,32 @@ https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0c
 #### Recommendation
 Recheck if the blocking or unblocking of the Admin leads to any errors that are outside the scope of this audit. Fix removeFromBlacklist() function.
 
-### StakedUSDeV2.sol
+## StakedUSDeV2.sol
 
-#### Disabling cooldown with setCooldownDuration(0) will be ignored by unstake().
+### Disabling cooldown with setCooldownDuration(0) will be ignored by unstake().
 Value of current cooldown isn't checked in unstake(). In case when we disable cooldown with setCooldownDuration(0) users will still need to wait for previous cooldown if request for withdraw have been submitted(cooldowns[owner]). 
 https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/StakedUSDeV2.sol#L78-L90
 
 #### Recommendation
 Extend unstake() logic with checks for disabled cooldowns.
 
+### USDeSilo can be assigned to FULL_RESTRICTED_STAKER_ROLE role
+Only single silo(USDeSilo) entity is created in StakedUSDeV2 constructor. In case if it will be restricted with FULL_RESTRICTED_STAKER_ROLE role that will block cooldownAssets() and cooldownShares() functions.
+Both will be blocked because FULL_RESTRICTED_STAKER_ROLE blocks every token interaction via _beforeTokenTransfer()
+https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/StakedUSDe.sol#L245-L252
+
+#### Recommendation
+Add additional logic to check that such case is not possible.
+
 ### MAX_COOLDOWN_DURATION should be constant
 `public MAX_COOLDOWN_DURATION = 90 days` should be constant
 
-### USDeSilo.sol
-#### Unused SafeERC20 library
+## USDeSilo.sol
+### Unused SafeERC20 library
 Library added but not used.
 https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/USDeSilo.sol#L13
 
-### USDe.sol
-#### deprecated-ERC20Permit import
+## USDe.sol
+### deprecated-ERC20Permit import
 Deprecated since 4.9.0 https://github.com/OpenZeppelin/openzeppelin-contracts/releases/tag/v4.9.0, use the  proper one ERC20Permit. 
 Similar dependency used in StackedUSDe.sol
