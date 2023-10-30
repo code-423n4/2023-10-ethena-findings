@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "radev_sw",
+  "risk": "2",
+  "title": "`EthenaMinting` Contract: Redemption May Fail Due to the `_supportedAssets` List Preventing the Transfer of Existing Collateral Assets",
+  "issueId": 508,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/508"
+}
