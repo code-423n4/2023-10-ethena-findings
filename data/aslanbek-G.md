@@ -36,7 +36,8 @@ The function is supposed to always revert. Removing the modifier saves 1600 gas 
 -   uint256 newVestingAmount = amount + getUnvestedAmount();
 +   uint256 newVestingAmount = amount;
 ```
-# [G-04] Redundant address casting 
+# [G-04] Redundant casting to address
+[StakedUSDe.sol#L138-L141](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/StakedUSDe.sol#L138-L141)
 ```diff
   function rescueTokens(address token, uint256 amount, address to) external onlyRole(DEFAULT_ADMIN_ROLE) {
 -   if (address(token) == asset()) revert InvalidToken();
