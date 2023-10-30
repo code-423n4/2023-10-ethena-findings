@@ -1,5 +1,4 @@
-## Summary<a name="Summary">
-
+## Summary
 ### Gas Optimizations
 |Tag|Issue|Contexts|
 |-|:-|:-|
