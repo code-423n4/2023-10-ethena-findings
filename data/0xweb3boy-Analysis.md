@@ -1,5 +1,7 @@
 # Ethena Labs - Enabling The Internet Bond
 Audit contest: `Ethena Labs`
+![Ethena LOGO](https://github.com/0xWeb3boy/photo/assets/113019033/a1c2e194-4060-43e5-81c8-1716c1bbf2aa)
+
 
 ## Table of Contents
 
@@ -47,6 +49,9 @@ https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/EthenaMinting.s
 https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/StakedUSDeV2.sol
 ## USDe.sol
 https://github.com/code-423n4/2023-10-ethena/blob/main/contracts/USDe.sol
+
+![Ethena Minting Design](https://github.com/0xWeb3boy/photo/assets/113019033/eea94600-e3c9-4781-a4f1-de4d7d740776)
+
 
 all these are a pivotal components responsible for implementing Ethena Labs. This understanding of the core pattern significantly facilitated the comprehension of the protocol contracts and their interconnections. During this phase, meticulous documentation of observations and the formulation of pertinent questions regarding potential exploits were undertaken, striking a balance between depth and breadth of analysis.
 
@@ -194,6 +199,8 @@ The insights presented are not only beneficial for the project team but also ext
 
 ### Time spent:
 18 hours
+
+
 
 
 
