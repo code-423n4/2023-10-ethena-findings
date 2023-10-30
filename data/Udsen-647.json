@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "THE `DEFAULT_ADMIN_ROLE` CAN ALSO DISABLE THE `mint` AND `redeem` FUNCTIONALITY WHICH IS NOT THE EXPECTED BEHAVIOUR OF THE PROTOCOL",
+  "issueId": 647,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/647"
+}
