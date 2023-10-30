@@ -18,6 +18,7 @@ function getDomainSeparator() public view returns (bytes32) {
     return _computeDomainSeparator();
   }
 ```
-If it is not changed, it returns previously calculated _domainSeparator, if it is changed it everytime goes to _computeDomainSeparator. It means after a hard-fork (block.chainid will be changed) everytime the function `hashOrder` is called, it calculates domainSeparator.
+If it is not changed, it returns previously calculated _domainSeparator, if it is changed it everytime goes to _computeDomainSeparator. It means after a hard-fork (block.chainid will be changed) everytime the function `hashOrder` (or another function that uses getDomainSeparator()) is called, it re-calculates domainSeparator.
+
 Recommendation: If a hard-fork is happended, simply update these two state variables (_chainId and _domainSeparator) as you did in constructor.
 
