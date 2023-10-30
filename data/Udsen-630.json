@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "THE DEPRECATED DRAFT VERSION OF THE `ERC20Permit.sol` CONTRACT IS USED IN THE `USDe.sol` CONTRACT",
+  "issueId": 630,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/630"
+}
