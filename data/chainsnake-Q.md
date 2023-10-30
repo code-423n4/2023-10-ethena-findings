@@ -79,5 +79,5 @@ By standard AccessControl, a user can have multiple roles and this is same for `
 https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/StakedUSDe.sol#L106-L113
 https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/StakedUSDe.sol#L120-L127
 
-Even if a staker was relieved from one restriction role, it can be restricted by the other role.
+Even if a staker was released from one restriction role, it can be restricted by the other role.
 So when adding or removing a restriction role, then either role should be considered in `addToBlacklist()` and `removeFromBlacklist()`.
