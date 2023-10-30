@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Udsen",
+  "risk": "2",
+  "title": "THE `StakedUSDe._withdraw` FUNCTION ALLOWS THE ADDRESSES WITH THE `SOFT_RESTRICTED_STAKER_ROLE` ROLE TO WITHDRAW `stUSDe` for `USDe` EVEN THOUGH THE DOCUMENTATION STATES OTHERWISE",
+  "issueId": 651,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/651"
+}
