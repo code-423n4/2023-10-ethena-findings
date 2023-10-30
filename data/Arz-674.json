@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Arz",
+  "risk": "2",
+  "title": "If the user gets blacklisted while the funds are in the Silo contract, the blacklisted user will still be able to unstake them",
+  "issueId": 674,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/674"
+}
