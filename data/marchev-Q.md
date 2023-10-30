@@ -54,3 +54,25 @@ Simplify the implementation by assigning `vestingAmount` to `amount` directly:
      // transfer assets from rewarder to this contract
      IERC20(asset()).safeTransferFrom(msg.sender, address(this), amount);
 ```
+
+[QA-4] Wrong error thrown in case of invalid order beneficiary
+
+The `EthenaMinting#verifyOrder()` function throws a wrong error in case of invalid beneficiary address. It throws `InvalidAmount()` but it should be `InvalidAddress()` instead.
+
+```sol
+if (order.beneficiary == address(0)) revert InvalidAmount(); //@audit Incorrect error is thrown here
+```
+
+**Recommendation:**
+Throw `InvalidZeroAddress()` error instead of `InvalidAmount()`:
+```diff
+@@ -340,7 +340,7 @@ contract EthenaMinting is IEthenaMinting, SingleAdminAccessControl, ReentrancyGu
+     bytes32 taker_order_hash = hashOrder(order);
+     address signer = ECDSA.recover(taker_order_hash, signature.signature_bytes);
+     if (!(signer == order.benefactor || delegatedSigner[signer][order.benefactor])) revert InvalidSignature();
+-    if (order.beneficiary == address(0)) revert InvalidAmount();
++    if (order.beneficiary == address(0)) revert InvalidZeroAddress();
+     if (order.collateral_amount == 0) revert InvalidAmount();
+     if (order.usde_amount == 0) revert InvalidAmount();
+     if (block.timestamp > order.expiry) revert SignatureExpired();
+```
