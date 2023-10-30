@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "erebus",
+  "risk": "3",
+  "title": "A caller with non-zero allowance from other users can DOS them",
+  "issueId": 729,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/729"
+}
