@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Maroutis",
+  "risk": "2",
+  "title": "`EthenaMinting` protocol can break for a token with a proxy and implementation contract (like cbETH)",
+  "issueId": 626,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/626"
+}
