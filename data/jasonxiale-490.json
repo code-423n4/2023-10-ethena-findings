@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "jasonxiale",
+  "risk": "2",
+  "title": "StakedUSDeV2.maxDeposit/maxMint/maxRedeem/maxWithdraw doesn't comform with EIP4626",
+  "issueId": 490,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/490"
+}
