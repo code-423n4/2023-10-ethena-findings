@@ -7,7 +7,7 @@ The function reverts anyways. Removing the modifier saves 1600 gas on deployment
 # [G-02] Use hardcoded value instead of retrieving it from calldata 
 [EthenaMinting.sol#L171](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L171)
 
-`order.order_type` is guaranteed to be `OrderType.MINT` thanks to the check at line 169.
+`order.order_type` is guaranteed to be `OrderType.MINT` because of the check at line 169.
 
 ```diff
     if (order.order_type != OrderType.MINT) revert InvalidOrder();
@@ -29,8 +29,10 @@ The function reverts anyways. Removing the modifier saves 1600 gas on deployment
 # [G-03] Remove adding zero
 [StakedUSDe.sol#L90-L91](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/StakedUSDe.sol#L90-L91)
 
+`getUnvestedAmount()` returns uint256. If it returns anything but zero, the execution reverts.
+
 ```diff
-    if (getUnvestedAmount() > 0) revert StillVesting();
+    if (getUnvestedAmount() > 0) revert StillVesting(); //  
 -   uint256 newVestingAmount = amount + getUnvestedAmount();
 +   uint256 newVestingAmount = amount;
 ```
@@ -71,7 +73,7 @@ The function reverts anyways. Removing the modifier saves 1600 gas on deployment
 
 [EthenaMinting.sol#L379](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L379)
 
-Downcasting to uint64 is absolutely not needed. It limits the space of nonces from 2^256 to 2^64 (which is unlikely to cause security issues) and uses slightly more gas.
+Downcasting to uint64 is absolutely not needed. It limits the space of nonces from `2^256 - 1` to `2^64 - 1` and uses slightly more gas.
 
 ```diff
 - uint256 invalidatorSlot = uint64(nonce) >> 8;
