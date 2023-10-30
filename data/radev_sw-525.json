@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "radev_sw",
+  "risk": "2",
+  "title": "Missing payable modifier in the `redeem()` and `transferToCustody()` functions, which prevents the contract from transferring Ether (NATIVE tokens)",
+  "issueId": 525,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/525"
+}
