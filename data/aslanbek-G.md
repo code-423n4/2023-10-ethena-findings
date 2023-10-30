@@ -43,18 +43,13 @@ The function reverts anyways. Removing the modifier saves 1600 gas on deployment
 ```diff
   | contracts/EthenaMinting.sol:EthenaMinting contract |                 |       |        |        |         |
   |----------------------------------------------------|-----------------|-------|--------|--------|---------|
-
   | Function Name                                      | min             | avg   | median | max    | # calls |
-
 - | mint                                               | 4657            | 80639 | 123779 | 195520 | 38      |
 + | mint                                               | 4657            | 80552 | 123779 | 195520 | 38      |
 
-
   | contracts/StakedUSDe.sol:StakedUSDe contract |                 |       |        |       |         |
   |----------------------------------------------|-----------------|-------|--------|-------|---------|
-
   | Function Name                                | min             | avg   | median | max   | # calls |
-
 - | deposit                                      | 16246           | 62953 | 75786  | 78986 | 38      |
 + | deposit                                      | 16246           | 62946 | 75786  | 78986 | 38      |
 
@@ -67,13 +62,42 @@ The function reverts anyways. Removing the modifier saves 1600 gas on deployment
 
   | contracts/StakedUSDeV2.sol:StakedUSDeV2 contract |                 |       |        |       |         |
   |--------------------------------------------------|-----------------|-------|--------|-------|---------|
-
   | Function Name                                    | min             | avg   | median | max   | # calls |
-
 - | cooldownShares                                   | 631             | 58837 | 69459  | 87674 | 12      |
 + | cooldownShares                                   | 631             | 58817 | 69342  | 87674 | 12      |
 ```
-# [G-05] use uint256 instead of uint104
+
+# [G-05] EthenaMinting#verify - unnecessary downcasting
+
+[EthenaMinting.sol#L379](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L379)
+
+Downcasting to uint64 is absolutely not needed. It limits the space of nonces from 2^256 to 2^64 (which is unlikely to cause security issues) and uses slightly more gas.
+
+```diff
+- uint256 invalidatorSlot = uint64(nonce) >> 8;
++ uint256 invalidatorSlot = uint64(nonce) >> 8;
+```
+```diff
+  | contracts/EthenaMinting.sol:EthenaMinting contract |                 |       |        |        |         |
+  |----------------------------------------------------|-----------------|-------|--------|--------|---------|
+  | Deployment Cost                                    | Deployment Size |       |        |        |         |
+- | 3576457                                            | 18793           |       |        |        |         |
++ | 3574657                                            | 18784           |       |        |        |         |
+
+  | Function Name                                      | min             | avg   | median | max    | # calls |
+- | hashOrder                                          | 1767            | 1767  | 1767   | 1767   | 56      |
++ | hashOrder                                          | 1767            | 1767  | 1767   | 1767   | 55      |
+- | maxMintPerBlock                                    | 385             | 1085  | 385    | 2385   | 20      |
++ | maxMintPerBlock                                    | 385             | 1121  | 385    | 2385   | 19      |
+
+- | mint                                               | 4657            | 78839 | 123779 | 195520 | 39      |
++ | mint                                               | 4657            | 80635 | 123773 | 195514 | 38      |
+
+- | redeem                                             | 6349            | 40053 | 27127  | 81127  | 16      |
++ | redeem                                             | 6349            | 40050 | 27125  | 81122  | 16      |
+```
+
+# [G-06] use uint256 instead of uint104
 
 [IStakedUSDeCooldown.sol#L8](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/interfaces/IStakedUSDeCooldown.sol#L8)
 
