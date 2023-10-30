@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "btk",
+  "risk": "2",
+  "title": "MINTER_ROLE can frontrun GATEKEEPERS tx and mint again",
+  "issueId": 349,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/349"
+}
