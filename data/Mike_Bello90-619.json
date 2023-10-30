@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Mike_Bello90",
+  "risk": "2",
+  "title": "Vulnerability: When Cooldown Duration changes from 90 to 0 Days, All Users Should be Able to Withdraw Immediately. / Function Unstake / Contract: StakedUSDeV2.sol",
+  "issueId": 619,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/619"
+}
