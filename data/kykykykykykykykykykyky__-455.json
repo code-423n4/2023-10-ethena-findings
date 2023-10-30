@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "kykykykykykykykykykyky__",
+  "risk": "2",
+  "title": "SingleAdminAccessControl :: acceptAdmin() doesn't update the admin correctly ",
+  "issueId": 455,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/455"
+}
