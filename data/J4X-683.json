@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "J4X",
+  "risk": "2",
+  "title": "Compromised minter can change route to misdirect user funds",
+  "issueId": 683,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/683"
+}
