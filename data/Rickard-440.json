@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "Rickard",
+  "risk": "2",
+  "title": "Silent failure during `usde.mint()` in `mint`",
+  "issueId": 440,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/440"
+}
