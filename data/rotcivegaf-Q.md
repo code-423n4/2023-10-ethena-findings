@@ -54,3 +54,15 @@ Critical functions should emit events
 - `disableMintRedeem` on [EthenaMinting.sol#L229](https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L229)
 
 Recommendation: emit events on critical functions
+
+## EIP712 is not correctly implemented for the Route struct
+
+As stated in the EIP712 standard - "The array values are encoded as the keccak256 hash of the concatenated encodeData of their contents". This is not correctly followed in EthenaMinting::encodeRoute as it does not do this for the Route struct array fields. While this is usually a more serious problem, the method is not called in the protocol and can just be removed.
+
+https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L334
+
+## Nonce could overflow
+
+Nonce can overflow and even if do a `safeCast` only con be used 256
+
+https://github.com/code-423n4/2023-10-ethena/blob/ee67d9b542642c9757a6b826c82d0cae60256509/contracts/EthenaMinting.sol#L379-L380
