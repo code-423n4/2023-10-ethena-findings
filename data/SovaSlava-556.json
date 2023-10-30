@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "SovaSlava",
+  "risk": "2",
+  "title": "The underlying assets may be locked for a longer duration than the cooldown period.",
+  "issueId": 556,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/556"
+}
