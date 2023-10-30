@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "supersizer0x",
+  "risk": "2",
+  "title": "when the user redeems assets and then the cooldown goes down it can be overwritten causing loss of the protocol and breaking invariant ",
+  "issueId": 554,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/554"
+}
