@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "SovaSlava",
+  "risk": "2",
+  "title": "User with role `SOFT_RESTRICTED_STAKER_ROLE` could withdraw tokens",
+  "issueId": 532,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/532"
+}
