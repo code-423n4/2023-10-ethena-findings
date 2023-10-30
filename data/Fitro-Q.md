@@ -9,7 +9,7 @@ function verifyOrder(Order calldata order, Signature calldata signature) public 
     bytes32 taker_order_hash = hashOrder(order);
     address signer = ECDSA.recover(taker_order_hash, signature.signature_bytes);
     if (!(signer == order.benefactor || delegatedSigner[signer][order.benefactor])) revert InvalidSignature();
- >  if (order.beneficiary == address(0)) revert InvalidAmount();  
+    if (order.beneficiary == address(0)) revert InvalidAmount();  
     if (order.collateral_amount == 0) revert InvalidAmount();
     if (order.usde_amount == 0) revert InvalidAmount();
     if (block.timestamp > order.expiry) revert SignatureExpired();
