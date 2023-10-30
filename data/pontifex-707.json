@@ -1,0 +1,8 @@
+{
+  "contest": 299,
+  "handle": "pontifex",
+  "risk": "2",
+  "title": "Users with `FULL_RESTRICTED_STAKER_ROLE` can unstake assets due to lack of user role check at the unstaking functionality",
+  "issueId": 707,
+  "issueUrl": "https://github.com/code-423n4/2023-10-ethena-findings/issues/707"
+}
