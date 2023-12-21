@@ -1625,8 +1625,6 @@ Ethena employs a strategy involving stETH and short positions in ETH perpetuals,
 
 1. **`USDe.sol`**:
 
-    ![usde-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/usde-contract.png?raw=true)
-
    - Code Organization:
      - The contract is well-organized and follows the best practices for code layout and structure.
      - It uses OpenZeppelin contracts, which are widely recognized and audited.
@@ -1648,8 +1646,6 @@ Ethena employs a strategy involving stETH and short positions in ETH perpetuals,
    - Overall, `USDe.sol` appears to be well-structured and follows best practices for security and code organization.
 
 2. **`EthenaMinting.sol`**:
-
-    ![ethena-minting-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/ethena-minting-contract.png?raw=true)
 
    - Code Organization:
      - It imports external libraries and contracts, including OpenZeppelin contracts.
@@ -1685,11 +1681,6 @@ Ethena employs a strategy involving stETH and short positions in ETH perpetuals,
 
   The contract inherits **Implementation of the ERC4626 "Tokenized Vault Standard" from OZ**
 
-    ![erc4626-oz-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/erc4626-oz-contract.png?raw=true)
-
-    
-    ![staked-usde-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/staked-usde-contract.png?raw=true)
-
 - Code Organization:
   - It imports external libraries and contracts, including OpenZeppelin contracts.
   - The constructor initializes contract parameters and roles.
@@ -1700,8 +1691,6 @@ Ethena employs a strategy involving stETH and short positions in ETH perpetuals,
   - Hooks and functions are in place to enforce restrictions on specific roles and token transfers.
 
 4.  **`StakedUSDeV2.sol:`**
-
-  ![staked-usde-v2-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/staked-usde-v2-contract.png?raw=true)
 
 - Code Organization:
   - The contract extends `StakedUSDe` and inherits its code organization structure.
@@ -1714,8 +1703,6 @@ Ethena employs a strategy involving stETH and short positions in ETH perpetuals,
 
 5. **`USDeSilo.sol:`**
 
-  ![usde-silo-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/usde-silo-contract.png?raw=true)
-
   - The contract is primary goal of `USDeSilo.sol` is to to `hold the funds` for the `cooldown period` whn user initiate `unstaking`. 
 
   **General Observations:**<br>
@@ -1726,8 +1713,6 @@ Ethena employs a strategy involving stETH and short positions in ETH perpetuals,
 
 6. **`SingleAdminAccessControl.sol:`**
     
-  ![single-admin-access-control-contract](https://github.com/radeveth/Ethena-c4-Contest/blob/main/single-admin-access-control-contract.png?raw=true)
-
   - EthenaMinting uses SingleAdminAccessControl rather than the standard AccessControl.
 
 In summary, the Ethena Protocol's codebase appears to be of high quality, with a strong focus on security and code organization.
